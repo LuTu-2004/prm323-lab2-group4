@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .header-title { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 700; fill: #0F172A; }
+      .header-sub { font-family: 'Inter', sans-serif; font-size: 14px; fill: #475569; }
+      .flow-title { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 600; fill: #1E293B; }
+      .node-text { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; fill: #0F172A; }
+      .node-sub { font-family: 'Inter', sans-serif; font-size: 10px; fill: #64748B; }
+      .arrow { stroke: #2563EB; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .arrow-err { stroke: #DC2626; stroke-width: 2; fill: none; marker-end: url(#arrowhead-red); }
+      .arrow-succ { stroke: #16A34A; stroke-width: 2; fill: none; marker-end: url(#arrowhead-green); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#DC2626" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#16A34A" />
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="900" class="bg"/>
+
+  <!-- Page Header -->
+  <text x="50" y="55" class="header-title">01. KIẾN TRÚC USER FLOWS - HỆ THỐNG EXE MATCH</text>
+  <text x="50" y="80" class="header-sub">Bao gồm 3 luồng hoàn chỉnh: Core Happy Path, Leader Management Flow, và Error/Recovery Flow</text>
+
+  <!-- FLOW 1: CORE HAPPY PATH -->
+  <g transform="translate(50, 110)">
+    <rect width="1300" height="220" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="8" height="220" rx="4" fill="#2563EB"/>
+    <text x="24" y="36" class="flow-title">FLOW 1: Ứng viên tìm kiếm & Xin gia nhập nhóm khởi nghiệp (Core Happy Path)</text>
+    <text x="24" y="56" class="header-sub">Điểm bắt đầu: SCR-02 Feed → SCR-04 Chi tiết nhóm → SCR-06 Pitch Sheet → SCR-04 Submitted → SCR-05 Applications</text>
+
+    <!-- Step 1 -->
+    <rect x="30" y="85" width="190" height="70" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="45" y="112" class="node-text" font-weight="700">1. Khám phá nhóm</text>
+    <text x="45" y="132" class="node-sub">SCR-02: Lướt Feed &amp; lọc EdTech</text>
+
+    <!-- Arrow 1-2 -->
+    <path d="M 220 120 L 270 120" class="arrow"/>
+
+    <!-- Step 2 -->
+    <rect x="280" y="85" width="200" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="295" y="112" class="node-text" font-weight="700">2. Xem chi tiết dự án</text>
+    <text x="295" y="132" class="node-sub">SCR-04: Đọc Tech Stack &amp; Sĩ số 3/5</text>
+
+    <!-- Arrow 2-3 -->
+    <path d="M 480 120 L 530 120" class="arrow"/>
+
+    <!-- Step 3 -->
+    <rect x="540" y="85" width="200" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="555" y="112" class="node-text" font-weight="700">3. Điền Form Pitch</text>
+    <text x="555" y="132" class="node-sub">SCR-06: Chọn Role &amp; Commit giờ</text>
+
+    <!-- Arrow 3-4 -->
+    <path d="M 740 120 L 790 120" class="arrow"/>
+
+    <!-- Step 4 -->
+    <rect x="800" y="85" width="210" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="815" y="112" class="node-text" font-weight="700">4. Nộp đơn thành công</text>
+    <text x="815" y="132" class="node-sub">SCR-04 (Sub): Hiển thị mã đơn #7842</text>
+
+    <!-- Arrow 4-5 -->
+    <path d="M 1010 120 L 1060 120" class="arrow"/>
+
+    <!-- Step 5 -->
+    <rect x="1070" y="85" width="200" height="70" rx="10" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+    <text x="1085" y="112" class="node-text" font-weight="700" fill="#16A34A">5. Theo dõi đơn</text>
+    <text x="1085" y="132" class="node-sub">SCR-05: Chờ Leader phản hồi</text>
+  </g>
+
+  <!-- FLOW 2: LEADER MANAGEMENT -->
+  <g transform="translate(50, 360)">
+    <rect width="1300" height="220" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="8" height="220" rx="4" fill="#0D9488"/>
+    <text x="24" y="36" class="flow-title">FLOW 2: Trưởng nhóm duyệt đơn &amp; Đặt lịch hẹn Chemistry Call</text>
+    <text x="24" y="56" class="header-sub">Điểm bắt đầu: SCR-09 Thông báo → SCR-05 Đơn ứng tuyển → SCR-06 Lên lịch Meet → SCR-07 Xác nhận lịch</text>
+
+    <!-- Step 1 -->
+    <rect x="30" y="85" width="200" height="70" rx="10" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5"/>
+    <text x="45" y="112" class="node-text" font-weight="700">1. Nhận thông báo mới</text>
+    <text x="45" y="132" class="node-sub">SCR-09: Có 1 hồ sơ Developer apply</text>
+
+    <!-- Arrow 1-2 -->
+    <path d="M 230 120 L 280 120" class="arrow" stroke="#0D9488"/>
+
+    <!-- Step 2 -->
+    <rect x="290" y="85" width="210" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="305" y="112" class="node-text" font-weight="700">2. Xem xét hồ sơ ứng viên</text>
+    <text x="305" y="132" class="node-sub">SCR-05: Kiểm tra GitHub &amp; Resume</text>
+
+    <!-- Arrow 2-3 -->
+    <path d="M 500 120 L 550 120" class="arrow" stroke="#0D9488"/>
+
+    <!-- Step 3 -->
+    <rect x="560" y="85" width="210" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="575" y="112" class="node-text" font-weight="700">3. Mời phỏng vấn sơ bộ</text>
+    <text x="575" y="132" class="node-sub">SCR-06: Chọn lịch Google Meet 30p</text>
+
+    <!-- Arrow 3-4 -->
+    <path d="M 770 120 L 820 120" class="arrow" stroke="#0D9488"/>
+
+    <!-- Step 4 -->
+    <rect x="830" y="85" width="210" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="845" y="112" class="node-text" font-weight="700">4. Chốt lịch Chemistry</text>
+    <text x="845" y="132" class="node-sub">SCR-07: Xác nhận gửi thư mời</text>
+
+    <!-- Arrow 4-5 -->
+    <path d="M 1040 120 L 1090 120" class="arrow" stroke="#0D9488"/>
+
+    <!-- Step 5 -->
+    <rect x="1100" y="85" width="170" height="70" rx="10" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+    <text x="1115" y="112" class="node-text" font-weight="700" fill="#16A34A">5. Kết nạp nhóm</text>
+    <text x="1115" y="132" class="node-sub">Cập nhật sĩ số 4/5</text>
+  </g>
+
+  <!-- FLOW 3: ERROR & RECOVERY -->
+  <g transform="translate(50, 610)">
+    <rect width="1300" height="250" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="8" height="250" rx="4" fill="#DC2626"/>
+    <text x="24" y="36" class="flow-title">FLOW 3: Lọc không có kết quả &amp; Phục hồi tìm kiếm (Error &amp; Recovery Branch)</text>
+    <text x="24" y="56" class="header-sub">Điểm bắt đầu: SCR-02 Feed → Lọc quá sâu → SCR-08 Empty State → Phục hồi bằng nút 'Reset Filters'</text>
+
+    <!-- Step 1 -->
+    <rect x="30" y="85" width="220" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="45" y="112" class="node-text" font-weight="700">1. Áp dụng bộ lọc quá hẹp</text>
+    <text x="45" y="132" class="node-sub">Từ khóa: 'Quantum NLP Rust'</text>
+
+    <!-- Arrow 1-2 (Error branch) -->
+    <path d="M 250 120 L 310 120" class="arrow-err"/>
+
+    <!-- Step 2: Empty State -->
+    <rect x="320" y="85" width="260" height="70" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+    <text x="335" y="112" class="node-text" font-weight="700" fill="#DC2626">2. [LỖI] Màn hình Empty State</text>
+    <text x="335" y="132" class="node-sub">SCR-08: 'No matching projects found'</text>
+
+    <!-- Branch A: Reset Filters (Green Recovery) -->
+    <path d="M 580 110 L 670 110" class="arrow-succ"/>
+    <rect x="680" y="75" width="270" height="70" rx="10" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+    <text x="695" y="102" class="node-text" font-weight="700" fill="#16A34A">3A. [PHỤC HỒI 1] Bấm 'Reset Filters'</text>
+    <text x="695" y="122" class="node-sub">Hệ thống xóa bộ lọc, tải lại feed đầy đủ</text>
+
+    <path d="M 950 110 L 1030 110" class="arrow-succ"/>
+    <rect x="1040" y="75" width="230" height="70" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="1055" y="102" class="node-text" font-weight="700">Quay lại SCR-02 Feed</text>
+    <text x="1055" y="122" class="node-sub">Hiển thị lại 18 nhóm đang mở tuyển</text>
+
+    <!-- Branch B: Suggest Alternate (Blue Recovery) -->
+    <path d="M 450 155 L 450 195 L 670 195" class="arrow"/>
+    <rect x="680" y="160" width="270" height="70" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="695" y="187" class="node-text" font-weight="700">3B. [PHỤC HỒI 2] Gợi ý tương đương</text>
+    <text x="695" y="207" class="node-sub">Chọn 'AI &amp; LLM Tutoring' từ đề xuất</text>
+
+    <path d="M 950 195 L 1030 195" class="arrow"/>
+    <rect x="1040" y="160" width="230" height="70" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="1055" y="187" class="node-text" font-weight="700">Khám phá EduConnect</text>
+    <text x="1055" y="207" class="node-sub">Tiếp tục luồng gia nhập nhóm</text>
+  </g>
+</svg>

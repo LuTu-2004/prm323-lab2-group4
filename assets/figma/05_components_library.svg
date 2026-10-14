@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" width="1400" height="1100">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .header-title { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 700; fill: #0F172A; }
+      .header-sub { font-family: 'Inter', sans-serif; font-size: 14px; fill: #475569; }
+      .section-title { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; fill: #1E293B; }
+      .comp-label { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; fill: #64748B; }
+      .btn-text { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; fill: #FFFFFF; text-anchor: middle; }
+      .input-text { font-family: 'Inter', sans-serif; font-size: 14px; fill: #0F172A; }
+    </style>
+    <filter id="shadow-comp" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="1100" class="bg"/>
+
+  <!-- Page Header -->
+  <text x="50" y="55" class="header-title">05. THƯ VIỆN COMPONENT TÁI SỬ DỤNG (9 COMPONENTS BẮT BUỘC)</text>
+  <text x="50" y="80" class="header-sub">Định nghĩa đầy đủ trạng thái (Variants) và thiết lập Auto Layout theo chuẩn đề bài</text>
+
+  <!-- COMPONENT 1: BUTTON VARIANTS -->
+  <g transform="translate(50, 110)">
+    <rect width="1300" height="160" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">1. Button Component (Touch Target: 48dp, Radius: 8dp)</text>
+
+    <!-- State: Default -->
+    <g transform="translate(24, 60)">
+      <text x="0" y="0" class="comp-label">State: Default</text>
+      <rect x="0" y="10" width="160" height="48" rx="8" fill="#2563EB"/>
+      <text x="80" y="39" class="btn-text">Xin gia nhập →</text>
+    </g>
+
+    <!-- State: Pressed -->
+    <g transform="translate(230, 60)">
+      <text x="0" y="0" class="comp-label">State: Pressed</text>
+      <rect x="0" y="10" width="160" height="48" rx="8" fill="#1D4ED8"/>
+      <text x="80" y="39" class="btn-text">Xin gia nhập →</text>
+    </g>
+
+    <!-- State: Disabled -->
+    <g transform="translate(440, 60)">
+      <text x="0" y="0" class="comp-label">State: Disabled</text>
+      <rect x="0" y="10" width="160" height="48" rx="8" fill="#E2E8F0"/>
+      <text x="80" y="39" class="btn-text" fill="#94A3B8">Đã đủ thành viên</text>
+    </g>
+
+    <!-- State: Loading -->
+    <g transform="translate(650, 60)">
+      <text x="0" y="0" class="comp-label">State: Loading</text>
+      <rect x="0" y="10" width="160" height="48" rx="8" fill="#2563EB" opacity="0.85"/>
+      <circle cx="80" cy="34" r="10" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-dasharray="25 15"/>
+    </g>
+
+    <!-- Variant: Outlined / Secondary -->
+    <g transform="translate(860, 60)">
+      <text x="0" y="0" class="comp-label">Variant: Outlined</text>
+      <rect x="0" y="10" width="160" height="48" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+      <text x="80" y="39" class="btn-text" fill="#2563EB">Xem hồ sơ</text>
+    </g>
+
+    <!-- Variant: Danger / Reject -->
+    <g transform="translate(1070, 60)">
+      <text x="0" y="0" class="comp-label">Variant: Error / Reject</text>
+      <rect x="0" y="10" width="160" height="48" rx="8" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="80" y="39" class="btn-text" fill="#DC2626">Từ chối đơn</text>
+    </g>
+  </g>
+
+  <!-- COMPONENT 2: TEXT FIELD VARIANTS -->
+  <g transform="translate(50, 290)">
+    <rect width="1300" height="170" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">2. Text Field Component (Touch Target: 48dp, Radius: 8dp)</text>
+
+    <!-- State: Default -->
+    <g transform="translate(24, 60)">
+      <text x="0" y="0" class="comp-label">State: Default</text>
+      <rect x="0" y="10" width="230" height="48" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+      <text x="14" y="39" class="input-text" fill="#94A3B8">Tìm kiếm dự án, kỹ năng...</text>
+    </g>
+
+    <!-- State: Focused -->
+    <g transform="translate(280, 60)">
+      <text x="0" y="0" class="comp-label">State: Focused (Active)</text>
+      <rect x="0" y="10" width="230" height="48" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+      <text x="14" y="39" class="input-text">EduConnect|</text>
+    </g>
+
+    <!-- State: Filled -->
+    <g transform="translate(540, 60)">
+      <text x="0" y="0" class="comp-label">State: Filled</text>
+      <rect x="0" y="10" width="230" height="48" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+      <text x="14" y="39" class="input-text">Lê Quốc Huy - SE180000</text>
+    </g>
+
+    <!-- State: Error -->
+    <g transform="translate(800, 60)">
+      <text x="0" y="0" class="comp-label">State: Error</text>
+      <rect x="0" y="10" width="230" height="48" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="14" y="39" class="input-text" fill="#DC2626">Lời tự giới thiệu quá ngắn</text>
+      <text x="0" y="74" font-family="'Inter'" font-size="11px" fill="#DC2626">⚠️ Tối thiểu từ 10 ký tự trở lên</text>
+    </g>
+
+    <!-- State: Disabled -->
+    <g transform="translate(1060, 60)">
+      <text x="0" y="0" class="comp-label">State: Disabled</text>
+      <rect x="0" y="10" width="210" height="48" rx="8" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="14" y="39" class="input-text" fill="#94A3B8">Không thể chỉnh sửa</text>
+    </g>
+  </g>
+
+  <!-- ROW 3: CARD, APP BAR, NAVIGATION, DIALOG, STATES -->
+  <!-- Card Component -->
+  <g transform="translate(50, 480)">
+    <rect width="410" height="280" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">3. Card Component (Auto Layout)</text>
+
+    <!-- Sample Project Card -->
+    <g transform="translate(24, 55)">
+      <rect width="360" height="195" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <!-- Header chip -->
+      <rect x="14" y="14" width="130" height="22" rx="4" fill="#EFF6FF"/>
+      <text x="22" y="29" font-family="'Inter'" font-size="11px" font-weight="600" fill="#2563EB">⚡ 96% Phù hợp kỹ năng</text>
+
+      <text x="14" y="60" font-family="'Inter'" font-size="16px" font-weight="700" fill="#0F172A">EduConnect - AI Tutor</text>
+      <text x="14" y="78" font-family="'Inter'" font-size="12px" fill="#64748B">EdTech • Cần: Technical Lead, Marketing</text>
+
+      <!-- Progress bar -->
+      <text x="14" y="106" font-family="'Inter'" font-size="12px" font-weight="600" fill="#334155">3/5 Thành viên đã tham gia</text>
+      <rect x="14" y="115" width="330" height="6" rx="3" fill="#E2E8F0"/>
+      <rect x="14" y="115" width="200" height="6" rx="3" fill="#2563EB"/>
+
+      <!-- CTA inside card -->
+      <rect x="14" y="140" width="330" height="40" rx="8" fill="#2563EB"/>
+      <text x="180" y="165" class="btn-text">Xem chi tiết nhóm →</text>
+    </g>
+  </g>
+
+  <!-- App Bar & Bottom Navigation Component -->
+  <g transform="translate(480, 480)">
+    <rect width="450" height="280" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">4 &amp; 5. App Bar &amp; Bottom Navigation Bar</text>
+
+    <!-- Top App Bar -->
+    <g transform="translate(24, 55)">
+      <rect width="400" height="56" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <text x="20" y="34" font-family="'Inter'" font-size="16px" font-weight="700" fill="#0F172A">EXE Match - Chi tiết nhóm</text>
+      <circle cx="370" cy="28" r="16" fill="#EFF6FF"/>
+      <text x="366" y="33" font-family="'Inter'" font-size="14px" fill="#2563EB">🔔</text>
+    </g>
+
+    <!-- Bottom Navigation Bar -->
+    <g transform="translate(24, 140)">
+      <rect width="400" height="64" rx="12" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <!-- Tab 1: Active -->
+      <rect x="15" y="8" width="80" height="48" rx="8" fill="#EFF6FF"/>
+      <text x="55" y="30" font-family="'Inter'" font-size="14px" text-anchor="middle">🧭</text>
+      <text x="55" y="46" font-family="'Inter'" font-size="10px" font-weight="700" fill="#2563EB" text-anchor="middle">Khám phá</text>
+
+      <!-- Tab 2 -->
+      <text x="155" y="30" font-family="'Inter'" font-size="14px" text-anchor="middle">📋</text>
+      <text x="155" y="46" font-family="'Inter'" font-size="10px" fill="#64748B" text-anchor="middle">Đơn đã nộp</text>
+
+      <!-- Tab 3 -->
+      <text x="255" y="30" font-family="'Inter'" font-size="14px" text-anchor="middle">👥</text>
+      <text x="255" y="46" font-family="'Inter'" font-size="10px" fill="#64748B" text-anchor="middle">Nhóm tôi</text>
+
+      <!-- Tab 4 -->
+      <text x="355" y="30" font-family="'Inter'" font-size="14px" text-anchor="middle">🔔</text>
+      <text x="355" y="46" font-family="'Inter'" font-size="10px" fill="#64748B" text-anchor="middle">Thông báo</text>
+    </g>
+  </g>
+
+  <!-- Dialog Component -->
+  <g transform="translate(950, 480)">
+    <rect width="400" height="280" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">6. Dialog Component (Modal Pop-up)</text>
+
+    <!-- Dialog Box -->
+    <g transform="translate(24, 55)">
+      <rect width="350" height="195" rx="16" fill="#FFFFFF" stroke="#CBD5E1" filter="url(#shadow-comp)"/>
+      <text x="20" y="35" font-family="'Inter'" font-size="16px" font-weight="700" fill="#0F172A">Xác nhận kết nạp thành viên?</text>
+      <text x="20" y="65" font-family="'Inter'" font-size="12px" fill="#475569">Bạn có chắc chắn muốn duyệt ứng viên</text>
+      <text x="20" y="85" font-family="'Inter'" font-size="12px" font-weight="600" fill="#0F172A">Lê Quốc Huy vào vai trò Technical Lead?</text>
+
+      <!-- Buttons -->
+      <rect x="20" y="130" width="140" height="42" rx="8" fill="#F1F5F9"/>
+      <text x="90" y="156" class="btn-text" fill="#475569">Hủy bỏ</text>
+
+      <rect x="180" y="130" width="150" height="42" rx="8" fill="#2563EB"/>
+      <text x="255" y="156" class="btn-text">Đồng ý kết nạp</text>
+    </g>
+  </g>
+
+  <!-- ROW 4: LOADING SKELETON, EMPTY STATE, ERROR STATE -->
+  <!-- Skeleton Loading -->
+  <g transform="translate(50, 780)">
+    <rect width="410" height="270" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">7. Loading Skeleton State</text>
+
+    <g transform="translate(24, 55)">
+      <rect width="360" height="180" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <rect x="16" y="18" width="100" height="18" rx="4" fill="#E2E8F0"/>
+      <rect x="16" y="50" width="220" height="20" rx="4" fill="#E2E8F0"/>
+      <rect x="16" y="80" width="280" height="14" rx="4" fill="#F1F5F9"/>
+      <rect x="16" y="100" width="180" height="14" rx="4" fill="#F1F5F9"/>
+      <rect x="16" y="130" width="328" height="36" rx="8" fill="#E2E8F0"/>
+    </g>
+  </g>
+
+  <!-- Empty State -->
+  <g transform="translate(480, 780)">
+    <rect width="450" height="270" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">8. Empty State Component</text>
+
+    <g transform="translate(24, 55)">
+      <rect width="400" height="180" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <circle cx="200" cy="50" r="24" fill="#EFF6FF"/>
+      <text x="194" y="56" font-family="'Inter'" font-size="18px">🔍</text>
+      <text x="200" y="95" font-family="'Inter'" font-size="14px" font-weight="700" fill="#0F172A" text-anchor="middle">Không tìm thấy nhóm phù hợp</text>
+      <text x="200" y="115" font-family="'Inter'" font-size="11px" fill="#64748B" text-anchor="middle">Hãy thử nới lỏng bộ lọc hoặc tìm chuyên ngành khác</text>
+      <rect x="130" y="130" width="140" height="34" rx="6" fill="#2563EB"/>
+      <text x="200" y="152" class="btn-text" font-size="12px">Đặt lại bộ lọc</text>
+    </g>
+  </g>
+
+  <!-- Error State -->
+  <g transform="translate(950, 780)">
+    <rect width="400" height="270" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-comp)"/>
+    <text x="24" y="34" class="section-title">9. Error State Component</text>
+
+    <g transform="translate(24, 55)">
+      <rect width="350" height="180" rx="12" fill="#FEF2F2" stroke="#FCA5A5"/>
+      <circle cx="175" cy="50" r="24" fill="#FEE2E2"/>
+      <text x="168" y="56" font-family="'Inter'" font-size="18px">⚠️</text>
+      <text x="175" y="95" font-family="'Inter'" font-size="14px" font-weight="700" fill="#DC2626" text-anchor="middle">Nhóm này vừa đủ slot!</text>
+      <text x="175" y="115" font-family="'Inter'" font-size="11px" fill="#7F1D1D" text-anchor="middle">Một ứng viên khác vừa được duyệt trước bạn vài giây</text>
+      <rect x="100" y="130" width="150" height="34" rx="6" fill="#DC2626"/>
+      <text x="175" y="152" class="btn-text" font-size="12px">Khám phá nhóm khác</text>
+    </g>
+  </g>
+</svg>

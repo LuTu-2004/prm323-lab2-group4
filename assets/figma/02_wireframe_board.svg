@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .header-title { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 700; fill: #0F172A; }
+      .header-sub { font-family: 'Inter', sans-serif; font-size: 14px; fill: #475569; }
+      .wf-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; fill: #334155; }
+      .wire-box { fill: #F1F5F9; stroke: #94A3B8; stroke-dasharray: 4 4; }
+      .wire-fill { fill: #CBD5E1; }
+    </style>
+    <filter id="shadow-wf" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="900" class="bg"/>
+
+  <!-- Page Header -->
+  <text x="50" y="55" class="header-title">02. BỐ CỤC WIREFRAME (LOW-FIDELITY WIREFRAMES)</text>
+  <text x="50" y="80" class="header-sub">Bản vẽ kiến trúc khung mộc (Low-Fi) của các màn hình chính trước khi lên thiết kế UI màu sắc</text>
+
+  <!-- Wireframe Screen 1: Discovery Feed -->
+  <g transform="translate(50, 110)">
+    <rect width="280" height="680" rx="16" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" filter="url(#shadow-wf)"/>
+    <text x="20" y="32" class="wf-title">WF-01: Discovery Feed</text>
+    
+    <!-- Top bar -->
+    <rect x="20" y="50" width="240" height="36" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <!-- Categories -->
+    <rect x="20" y="100" width="60" height="24" rx="12" class="wire-fill"/>
+    <rect x="90" y="100" width="60" height="24" rx="12" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <rect x="160" y="100" width="60" height="24" rx="12" fill="#F1F5F9" stroke="#CBD5E1"/>
+
+    <!-- Card 1 -->
+    <rect x="20" y="145" width="240" height="150" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <rect x="35" y="160" width="80" height="14" rx="3" fill="#E2E8F0"/>
+    <rect x="35" y="185" width="160" height="18" rx="3" class="wire-fill"/>
+    <rect x="35" y="210" width="200" height="12" rx="3" fill="#E2E8F0"/>
+    <rect x="35" y="230" width="140" height="12" rx="3" fill="#E2E8F0"/>
+    <rect x="35" y="255" width="210" height="26" rx="6" class="wire-fill"/>
+
+    <!-- Card 2 -->
+    <rect x="20" y="310" width="240" height="150" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <rect x="35" y="325" width="80" height="14" rx="3" fill="#E2E8F0"/>
+    <rect x="35" y="350" width="160" height="18" rx="3" class="wire-fill"/>
+    <rect x="35" y="375" width="200" height="12" rx="3" fill="#E2E8F0"/>
+    <rect x="35" y="420" width="210" height="26" rx="6" class="wire-fill"/>
+
+    <!-- Bottom Nav Wire -->
+    <rect x="0" y="620" width="280" height="60" rx="0" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <circle cx="45" cy="650" r="12" class="wire-fill"/>
+    <circle cx="110" cy="650" r="12" fill="#E2E8F0"/>
+    <circle cx="175" cy="650" r="12" fill="#E2E8F0"/>
+    <circle cx="235" cy="650" r="12" fill="#E2E8F0"/>
+  </g>
+
+  <!-- Wireframe Screen 2: Project Detail -->
+  <g transform="translate(380, 110)">
+    <rect width="280" height="680" rx="16" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" filter="url(#shadow-wf)"/>
+    <text x="20" y="32" class="wf-title">WF-02: Project Detail</text>
+
+    <!-- Header bar -->
+    <rect x="20" y="50" width="30" height="30" rx="6" fill="#E2E8F0"/>
+    <rect x="60" y="56" width="140" height="18" rx="3" class="wire-fill"/>
+
+    <!-- Banner -->
+    <rect x="20" y="95" width="240" height="110" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <rect x="35" y="110" width="180" height="20" rx="4" class="wire-fill"/>
+    <rect x="35" y="140" width="120" height="12" rx="3" fill="#E2E8F0"/>
+    <rect x="35" y="165" width="210" height="24" rx="4" fill="#E2E8F0"/>
+
+    <!-- Grid 4 stats -->
+    <rect x="20" y="220" width="115" height="50" rx="6" fill="#F1F5F9"/>
+    <rect x="145" y="220" width="115" height="50" rx="6" fill="#F1F5F9"/>
+    <rect x="20" y="280" width="115" height="50" rx="6" fill="#F1F5F9"/>
+    <rect x="145" y="280" width="115" height="50" rx="6" fill="#F1F5F9"/>
+
+    <!-- Detail Description -->
+    <rect x="20" y="345" width="140" height="16" rx="3" class="wire-fill"/>
+    <rect x="20" y="370" width="240" height="10" rx="2" fill="#E2E8F0"/>
+    <rect x="20" y="390" width="220" height="10" rx="2" fill="#E2E8F0"/>
+    <rect x="20" y="410" width="200" height="10" rx="2" fill="#E2E8F0"/>
+
+    <!-- Fixed Bottom Button -->
+    <rect x="0" y="620" width="280" height="60" rx="0" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <rect x="20" y="632" width="240" height="38" rx="8" class="wire-fill"/>
+  </g>
+
+  <!-- Wireframe Screen 3: Apply Sheet -->
+  <g transform="translate(710, 110)">
+    <rect width="280" height="680" rx="16" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" filter="url(#shadow-wf)"/>
+    <text x="20" y="32" class="wf-title">WF-03: Pitch Sheet</text>
+
+    <!-- Handle -->
+    <rect x="115" y="55" width="50" height="5" rx="3" fill="#CBD5E1"/>
+
+    <rect x="20" y="80" width="180" height="20" rx="4" class="wire-fill"/>
+    <rect x="20" y="110" width="240" height="12" rx="3" fill="#E2E8F0"/>
+
+    <!-- Role select option 1 -->
+    <rect x="20" y="135" width="240" height="60" rx="8" fill="#F8FAFC" stroke="#94A3B8"/>
+    <circle cx="40" cy="165" r="8" class="wire-fill"/>
+    <rect x="58" y="150" width="140" height="14" rx="3" class="wire-fill"/>
+    <rect x="58" y="170" width="100" height="10" rx="2" fill="#E2E8F0"/>
+
+    <!-- Role select option 2 -->
+    <rect x="20" y="205" width="240" height="60" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <circle cx="40" cy="235" r="8" fill="#E2E8F0"/>
+    <rect x="58" y="220" width="140" height="14" rx="3" fill="#CBD5E1"/>
+
+    <!-- Text area -->
+    <rect x="20" y="280" width="120" height="14" rx="3" class="wire-fill"/>
+    <rect x="20" y="305" width="240" height="90" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <rect x="30" y="320" width="180" height="10" rx="2" fill="#E2E8F0"/>
+    <rect x="30" y="340" width="150" height="10" rx="2" fill="#E2E8F0"/>
+
+    <!-- Proof of work files -->
+    <rect x="20" y="410" width="240" height="40" rx="6" fill="#F1F5F9" stroke="#E2E8F0"/>
+    <rect x="20" y="460" width="240" height="40" rx="6" fill="#F1F5F9" stroke="#E2E8F0"/>
+
+    <!-- Bottom Submit -->
+    <rect x="0" y="620" width="280" height="60" rx="0" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <rect x="20" y="632" width="240" height="38" rx="8" class="wire-fill"/>
+  </g>
+
+  <!-- Wireframe Screen 4: Empty State -->
+  <g transform="translate(1040, 110)">
+    <rect width="280" height="680" rx="16" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" filter="url(#shadow-wf)"/>
+    <text x="20" y="32" class="wf-title">WF-04: Empty State</text>
+
+    <!-- Top search -->
+    <rect x="20" y="50" width="240" height="36" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+    
+    <!-- Empty Illustration -->
+    <circle cx="140" cy="180" r="50" fill="#F1F5F9" stroke="#CBD5E1" stroke-dasharray="4 4"/>
+    <circle cx="140" cy="180" r="24" class="wire-fill"/>
+
+    <rect x="50" y="250" width="180" height="18" rx="4" class="wire-fill"/>
+    <rect x="30" y="280" width="220" height="10" rx="2" fill="#E2E8F0"/>
+    <rect x="40" y="298" width="200" height="10" rx="2" fill="#E2E8F0"/>
+
+    <!-- CTA Reset -->
+    <rect x="50" y="330" width="180" height="38" rx="8" class="wire-fill"/>
+
+    <!-- Suggested cards -->
+    <rect x="20" y="400" width="140" height="14" rx="3" class="wire-fill"/>
+    <rect x="20" y="425" width="240" height="60" rx="6" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <rect x="20" y="495" width="240" height="60" rx="6" fill="#F8FAFC" stroke="#CBD5E1"/>
+
+    <!-- Bottom Nav Wire -->
+    <rect x="0" y="620" width="280" height="60" rx="0" fill="#F1F5F9" stroke="#CBD5E1"/>
+    <circle cx="45" cy="650" r="12" class="wire-fill"/>
+    <circle cx="110" cy="650" r="12" fill="#E2E8F0"/>
+    <circle cx="175" cy="650" r="12" fill="#E2E8F0"/>
+    <circle cx="235" cy="650" r="12" fill="#E2E8F0"/>
+  </g>
+</svg>

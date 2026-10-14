@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950" width="1400" height="950">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .header-title { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 700; fill: #0F172A; }
+      .header-sub { font-family: 'Inter', sans-serif; font-size: 14px; fill: #475569; }
+      .section-title { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; fill: #1E293B; }
+      .token-name { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; fill: #0F172A; }
+      .token-sub { font-family: 'Inter', sans-serif; font-size: 11px; fill: #64748B; font-family: monospace; }
+      .contrast-badge { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; fill: #16A34A; }
+    </style>
+    <filter id="shadow-card" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="950" class="bg"/>
+
+  <!-- Page Header -->
+  <text x="50" y="55" class="header-title">04. DESIGN SYSTEM &amp; TOKENS - EXE MATCH</text>
+  <text x="50" y="80" class="header-sub">Hệ thống Design Tokens chuẩn WCAG 2.1 AA (Tương phản tối thiểu 4.5:1), Material Design 3</text>
+
+  <!-- SECTION 1: COLOR PALETTE -->
+  <g transform="translate(50, 110)">
+    <rect width="1300" height="260" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-card)"/>
+    <text x="24" y="34" class="section-title">1. Color Palette Tokens (WCAG 2.1 AA Compliant)</text>
+
+    <!-- Color Swatch 1: Primary -->
+    <g transform="translate(24, 55)">
+      <rect width="135" height="110" rx="12" fill="#2563EB"/>
+      <text x="0" y="132" class="token-name">color-primary</text>
+      <text x="0" y="148" class="token-sub">#2563EB • 4.8:1</text>
+      <rect x="0" y="155" width="70" height="18" rx="4" fill="#DCFCE7"/>
+      <text x="6" y="168" class="contrast-badge">WCAG PASS</text>
+    </g>
+
+    <!-- Color Swatch 2: Primary Variant -->
+    <g transform="translate(185, 55)">
+      <rect width="135" height="110" rx="12" fill="#1D4ED8"/>
+      <text x="0" y="132" class="token-name">primary-variant</text>
+      <text x="0" y="148" class="token-sub">#1D4ED8 • 7.2:1</text>
+      <rect x="0" y="155" width="70" height="18" rx="4" fill="#DCFCE7"/>
+      <text x="6" y="168" class="contrast-badge">WCAG AAA</text>
+    </g>
+
+    <!-- Color Swatch 3: Primary Container -->
+    <g transform="translate(345, 55)">
+      <rect width="135" height="110" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="0" y="132" class="token-name">primary-container</text>
+      <text x="0" y="148" class="token-sub">#EFF6FF • Soft BG</text>
+      <text x="0" y="168" class="token-sub" fill="#3B82F6">Chip / Badge BG</text>
+    </g>
+
+    <!-- Color Swatch 4: Surface -->
+    <g transform="translate(505, 55)">
+      <rect width="135" height="110" rx="12" fill="#FFFFFF" stroke="#CBD5E1"/>
+      <text x="0" y="132" class="token-name">color-surface</text>
+      <text x="0" y="148" class="token-sub">#FFFFFF • Cards</text>
+      <text x="0" y="168" class="token-sub">Elevation base</text>
+    </g>
+
+    <!-- Color Swatch 5: Background -->
+    <g transform="translate(665, 55)">
+      <rect width="135" height="110" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="0" y="132" class="token-name">color-background</text>
+      <text x="0" y="148" class="token-sub">#F8FAFC • Slate-50</text>
+      <text x="0" y="168" class="token-sub">Anti-glare screen</text>
+    </g>
+
+    <!-- Color Swatch 6: Text Primary -->
+    <g transform="translate(825, 55)">
+      <rect width="135" height="110" rx="12" fill="#0F172A"/>
+      <text x="0" y="132" class="token-name">text-primary</text>
+      <text x="0" y="148" class="token-sub">#0F172A • 14.2:1</text>
+      <rect x="0" y="155" width="70" height="18" rx="4" fill="#DCFCE7"/>
+      <text x="6" y="168" class="contrast-badge">WCAG AAA</text>
+    </g>
+
+    <!-- Color Swatch 7: Text Secondary -->
+    <g transform="translate(985, 55)">
+      <rect width="135" height="110" rx="12" fill="#475569"/>
+      <text x="0" y="132" class="token-name">text-secondary</text>
+      <text x="0" y="148" class="token-sub">#475569 • 5.4:1</text>
+      <rect x="0" y="155" width="70" height="18" rx="4" fill="#DCFCE7"/>
+      <text x="6" y="168" class="contrast-badge">WCAG PASS</text>
+    </g>
+
+    <!-- Color Swatch 8: Error / Alert -->
+    <g transform="translate(1145, 55)">
+      <rect width="135" height="110" rx="12" fill="#DC2626"/>
+      <text x="0" y="132" class="token-name">color-error</text>
+      <text x="0" y="148" class="token-sub">#DC2626 • 4.7:1</text>
+      <rect x="0" y="155" width="70" height="18" rx="4" fill="#DCFCE7"/>
+      <text x="6" y="168" class="contrast-badge">WCAG PASS</text>
+    </g>
+  </g>
+
+  <!-- SECTION 2: TYPOGRAPHY SYSTEM -->
+  <g transform="translate(50, 400)">
+    <rect width="630" height="500" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-card)"/>
+    <text x="24" y="34" class="section-title">2. Typography Scale (Inter / Roboto)</text>
+
+    <!-- Headline Large -->
+    <g transform="translate(24, 60)">
+      <text x="0" y="22" font-family="'Inter', sans-serif" font-size="24px" font-weight="700" fill="#0F172A">Headline Large (24sp Bold)</text>
+      <text x="0" y="40" class="token-sub">Usage: Onboarding, Hero title • Line-height: 32dp</text>
+    </g>
+    <line x1="24" y1="120" x2="600" y2="120" stroke="#F1F5F9"/>
+
+    <!-- Headline Medium -->
+    <g transform="translate(24, 140)">
+      <text x="0" y="20" font-family="'Inter', sans-serif" font-size="20px" font-weight="600" fill="#0F172A">Headline Medium (20sp Semi-Bold)</text>
+      <text x="0" y="38" class="token-sub">Usage: App Bar Title, Project Name • Line-height: 28dp</text>
+    </g>
+    <line x1="24" y1="200" x2="600" y2="200" stroke="#F1F5F9"/>
+
+    <!-- Title Medium -->
+    <g transform="translate(24, 220)">
+      <text x="0" y="16" font-family="'Inter', sans-serif" font-size="16px" font-weight="600" fill="#0F172A">Title Medium (16sp Semi-Bold)</text>
+      <text x="0" y="34" class="token-sub">Usage: Card Header, Section Heading • Line-height: 24dp</text>
+    </g>
+    <line x1="24" y1="275" x2="600" y2="275" stroke="#F1F5F9"/>
+
+    <!-- Body Large & Medium -->
+    <g transform="translate(24, 295)">
+      <text x="0" y="16" font-family="'Inter', sans-serif" font-size="14px" font-weight="400" fill="#334155">Body Medium (14sp Regular - WCAG Minimum)</text>
+      <text x="0" y="36" font-family="'Inter', sans-serif" font-size="14px" font-weight="400" fill="#64748B">"EduConnect - AI Tutor tìm kiếm Technical Lead khối ngành Công nghệ"</text>
+      <text x="0" y="54" class="token-sub">Usage: Card description, pitch body text • Line-height: 20dp</text>
+    </g>
+    <line x1="24" y1="375" x2="600" y2="375" stroke="#F1F5F9"/>
+
+    <!-- Label & Tag -->
+    <g transform="translate(24, 395)">
+      <text x="0" y="16" font-family="'Inter', sans-serif" font-size="12px" font-weight="600" fill="#2563EB">LABEL SMALL (12sp Medium / Uppercase)</text>
+      <text x="0" y="34" class="token-sub">Usage: Role tags, deadline countdown chips • Line-height: 16dp</text>
+    </g>
+  </g>
+
+  <!-- SECTION 3: SPACING, RADIUS, ELEVATION -->
+  <g transform="translate(710, 400)">
+    <rect width="640" height="500" rx="16" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow-card)"/>
+    <text x="24" y="34" class="section-title">3. Spacing, Radius &amp; Elevation Scale</text>
+
+    <!-- Spacing Scale -->
+    <text x="24" y="70" class="token-name">Spacing Tokens (Base 4/8dp Grid):</text>
+    <g transform="translate(24, 85)">
+      <!-- 4dp -->
+      <rect x="0" y="0" width="4" height="24" fill="#2563EB"/>
+      <text x="0" y="38" class="token-sub">4dp (xs)</text>
+
+      <!-- 8dp -->
+      <rect x="60" y="0" width="8" height="24" fill="#2563EB"/>
+      <text x="60" y="38" class="token-sub">8dp (sm)</text>
+
+      <!-- 16dp -->
+      <rect x="130" y="0" width="16" height="24" fill="#2563EB"/>
+      <text x="130" y="38" class="token-sub">16dp (md)</text>
+
+      <!-- 24dp -->
+      <rect x="210" y="0" width="24" height="24" fill="#2563EB"/>
+      <text x="210" y="38" class="token-sub">24dp (lg)</text>
+
+      <!-- 32dp -->
+      <rect x="300" y="0" width="32" height="24" fill="#2563EB"/>
+      <text x="300" y="38" class="token-sub">32dp (xl)</text>
+    </g>
+
+    <line x1="24" y1="150" x2="610" y2="150" stroke="#F1F5F9"/>
+
+    <!-- Radius Scale -->
+    <text x="24" y="180" class="token-name">Border Radius Tokens:</text>
+    <g transform="translate(24, 200)">
+      <!-- 8dp -->
+      <rect x="0" y="0" width="120" height="50" rx="8" fill="#F1F5F9" stroke="#CBD5E1"/>
+      <text x="18" y="30" class="node-text">radius-sm: 8dp</text>
+
+      <!-- 12dp -->
+      <rect x="140" y="0" width="130" height="50" rx="12" fill="#F1F5F9" stroke="#CBD5E1"/>
+      <text x="18" y="30" transform="translate(140, 0)" class="node-text">radius-md: 12dp</text>
+
+      <!-- 16dp -->
+      <rect x="290" y="0" width="130" height="50" rx="16" fill="#F1F5F9" stroke="#CBD5E1"/>
+      <text x="18" y="30" transform="translate(290, 0)" class="node-text">radius-lg: 16dp</text>
+
+      <!-- 999dp -->
+      <rect x="440" y="0" width="140" height="50" rx="25" fill="#EFF6FF" stroke="#93C5FD"/>
+      <text x="18" y="30" transform="translate(440, 0)" class="node-text" fill="#1D4ED8">radius-full: 999</text>
+    </g>
+
+    <line x1="24" y1="280" x2="610" y2="280" stroke="#F1F5F9"/>
+
+    <!-- Elevation Scale -->
+    <text x="24" y="310" class="token-name">Elevation &amp; Shadow Tokens:</text>
+    <g transform="translate(24, 330)">
+      <!-- Level 0 -->
+      <rect x="0" y="0" width="170" height="90" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <text x="16" y="35" class="token-name">Elevation 0</text>
+      <text x="16" y="55" class="token-sub">No shadow, 1px border</text>
+      <text x="16" y="70" class="token-sub">Flat input / Flat chips</text>
+
+      <!-- Level 1 -->
+      <g filter="url(#shadow-card)">
+        <rect x="200" y="0" width="170" height="90" rx="12" fill="#FFFFFF"/>
+      </g>
+      <text x="216" y="35" class="token-name">Elevation 1</text>
+      <text x="216" y="55" class="token-sub">0px 2px 4px (6% opac)</text>
+      <text x="216" y="70" class="token-sub">Project Cards in Feed</text>
+
+      <!-- Level 2 -->
+      <g filter="url(#shadow-card)">
+        <rect x="400" y="0" width="180" height="90" rx="12" fill="#FFFFFF"/>
+      </g>
+      <text x="416" y="35" class="token-name">Elevation 2</text>
+      <text x="416" y="55" class="token-sub">0px 8px 16px (10% opac)</text>
+      <text x="416" y="70" class="token-sub">Bottom Sheet &amp; Dialog</text>
+    </g>
+  </g>
+</svg>
