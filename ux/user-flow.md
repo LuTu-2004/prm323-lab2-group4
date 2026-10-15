@@ -36,79 +36,98 @@ App Root (Bottom Navigation & Main Screens)
 
 ## 2. Các kịch bản luồng người dùng (User Flows)
 
-### Flow 1: Ứng viên tìm kiếm và xin gia nhập nhóm phù hợp (Core Happy Path)
-* **Điểm bắt đầu:** Ứng viên ở Màn hình Khám phá (SCR-02).
-* **Mục tiêu:** Tìm được nhóm EdTech đang thiếu Developer và gửi đơn xin gia nhập.
-* **Điểm kết thúc:** Đơn ứng tuyển được gửi thành công, chuyển sang trạng thái chờ duyệt (Pending) ở SCR-07.
+### Flow 1: Ứng viên tìm kiếm và xin gia nhập nhóm phù hợp
+* **Điểm bắt đầu:** Ứng viên tại Màn hình Khám phá (SCR-02).
+* **Mục tiêu:** Tìm được nhóm EdTech phù hợp để xin gia nhập hoặc lưu lại đối sánh.
+* **Điểm kết thúc:** 
+  * Nhánh chính: Đơn ứng tuyển được gửi thành công (SCR-07).
+  * Nhánh thay thế: Dự án được lưu vào danh sách Bookmark để xem xét sau.
 
 ```mermaid
 flowchart TD
-    Start([Bắt đầu: Màn hình SCR-02 Discovery Feed]) --> Search[Sử dụng thanh tìm kiếm hoặc chọn tag EdTech]
+    Start([BẮT ĐẦU: SCR-02 Discovery Feed]) --> Search[Tìm kiếm từ khóa hoặc chọn Tag EdTech]
     Search --> Filter[Nhấn nút Lọc để chọn tiêu chí Developer]
-    Filter --> ViewGroup[Chọn nhóm EduConnect từ danh sách]
-    ViewGroup --> Detail[Xem Màn hình SCR-04 Chi tiết nhóm]
-    Detail --> CheckSlot{Nhóm còn slot trống?}
-    CheckSlot -- Còn slot --> ClickApply[Bấm nút 'Xin gia nhập']
-    ClickApply --> OpenPitch[Mở Màn hình SCR-06 Bottom Sheet Pitch]
-    OpenPitch --> FillForm[Điền lời nhắn & xác nhận kỹ năng]
-    FillForm --> Submit[Bấm 'Gửi yêu cầu']
-    Submit --> ShowSuccess[Hiển thị Toast: Gửi thành công!]
+    Filter --> ViewGroup[Chọn thẻ nhóm EduConnect từ danh sách]
+    ViewGroup --> Detail[Xem SCR-04 Chi tiết nhóm EduConnect]
+    Detail --> Decision{Hành động của ứng viên?}
+
+    %% Nhánh thành công (Happy Path)
+    Decision -- [HAPPY PATH] Ứng tuyển ngay --> ClickApply[Bấm nút 'Xin gia nhập']
+    ClickApply --> OpenPitch[Mở SCR-06 Bottom Sheet Pitch]
+    OpenPitch --> FillForm[Chọn Role Developer & điền cam kết 12h/tuần]
+    FillForm --> Submit[Bấm 'Nộp đơn ứng tuyển']
+    Submit --> ShowSuccess[SCR-04 Sub: Thông báo nộp thành công #7842]
     ShowSuccess --> NavManage[Điều hướng sang SCR-07 Quản lý đơn]
-    NavManage --> End([Kết thúc: Đơn ở trạng thái Chờ duyệt])
+    NavManage --> EndHappy([KẾT THÚC CHÍNH: Đơn ở trạng thái Chờ duyệt])
+
+    %% Nhánh thay thế (Alternative Path)
+    Decision -- [NHÁNH THAY THẾ] Chưa muốn nộp ngay --> ClickBookmark[Bấm icon Bookmark lưu dự án]
+    ClickBookmark --> ToastSaved[Hiển thị Toast: 'Đã lưu vào danh sách quan tâm']
+    ToastSaved --> ContinueBrowsing[Tiếp tục lướt xem các nhóm khác]
+    ContinueBrowsing --> EndAlt([KẾT THÚC THAY THẾ: Dự án được lưu trong mục Saved])
 ```
 
 ---
 
-### Flow 2: Trưởng nhóm xem đơn ứng tuyển và duyệt thành viên (Creator Management Flow)
+### Flow 2: Trưởng nhóm xem xét đơn ứng tuyển và phản hồi
 * **Điểm bắt đầu:** Trưởng nhóm nhận thông báo có ứng viên mới (SCR-09).
-* **Mục tiêu:** Đánh giá hồ sơ của ứng viên và quyết định duyệt vào nhóm.
-* **Điểm kết thúc:** Ứng viên trở thành thành viên chính thức, slot nhóm được cập nhật trên SCR-08.
+* **Mục tiêu:** Đánh giá hồ sơ ứng viên và đưa ra quyết định kết nạp hoặc từ chối.
+* **Điểm kết thúc:** 
+  * Nhánh chính: Ứng viên được kết nạp, sĩ số nhóm cập nhật lên 4/5 (SCR-08).
+  * Nhánh thay thế: Đơn bị từ chối kèm lời nhắn và chuyển vào danh sách dự phòng.
 
 ```mermaid
 flowchart TD
-    Start([Bắt đầu: Nhận thông báo tại SCR-09]) --> ClickNotif[Chạm vào thông báo: 'Có ứng viên apply mới']
+    Start([BẮT ĐẦU: Nhận thông báo tại SCR-09]) --> ClickNotif[Chạm thông báo: 'Có ứng viên apply mới']
     ClickNotif --> OpenManage[Mở SCR-07 Tab Đơn apply cần duyệt]
     OpenManage --> ViewApplicant[Xem thẻ ứng viên Lê Quốc Huy]
     ViewApplicant --> OpenProfile[Nhấn xem SCR-05 Hồ sơ năng lực]
-    OpenProfile --> Evaluate{Kỹ năng & cam kết có đạt?}
-    Evaluate -- Phù hợp --> ClickAccept[Bấm nút 'Chấp nhận']
+    OpenProfile --> Evaluate{Đánh giá kỹ năng & mức cam kết?}
+
+    %% Nhánh thành công (Happy Path)
+    Evaluate -- [HAPPY PATH] Kỹ năng đạt chuẩn --> ClickAccept[Bấm nút 'Chấp nhận kết nạp']
     ClickAccept --> ShowConfirmDialog[Hiển thị Dialog xác nhận kết nạp]
     ShowConfirmDialog --> Confirm[Nhấn 'Đồng ý kết nạp']
     Confirm --> LoadingState[Chuyển cảnh xử lý Loading 1.5s]
-    LoadingState --> UpdateTeam[Hệ thống cập nhật sĩ số nhóm lên 4/5]
+    LoadingState --> UpdateTeam[Cập nhật sĩ số nhóm lên 4/5]
     UpdateTeam --> NavDashboard[Chuyển sang SCR-08 Team Dashboard]
-    NavDashboard --> End([Kết thúc: Thành viên mới xuất hiện trong nhóm])
-    Evaluate -- Không phù hợp --> ClickReject[Bấm nút 'Từ chối']
-    ClickReject --> PromptReason[Chọn lý do: 'Đã tuyển đủ vai trò']
-    PromptReason --> EndReject([Kết thúc: Đơn chuyển sang trạng thái Từ chối])
+    NavDashboard --> EndHappy2([KẾT THÚC CHÍNH: Ứng viên trở thành thành viên chính thức])
+
+    %% Nhánh thay thế (Alternative Path)
+    Evaluate -- [NHÁNH THAY THẾ] Chưa phù hợp đề tài --> ClickReject[Bấm nút 'Từ chối']
+    ClickReject --> PromptReason[Chọn lý do: 'Đã tuyển đủ vai trò Developer']
+    PromptReason --> SendEncourage[Gửi tin nhắn động viên & lưu vào Talent Pool]
+    SendEncourage --> EndAlt2([KẾT THÚC THAY THẾ: Đơn chuyển sang trạng thái Từ chối lịch sự])
 ```
 
 ---
 
-### Flow 3: Tìm kiếm thất bại & Xử lý lỗi nhóm đã đủ slot (Error & Recovery Flow - Bắt buộc)
-* **Điểm bắt đầu:** Ứng viên tìm kiếm nhóm hoặc gửi yêu cầu gia nhập (SCR-02 / SCR-04).
-* **Tình huống lỗi 1:** Bộ lọc quá hẹp dẫn tới không tìm thấy kết quả (Empty State).
-* **Tình huống lỗi 2:** Ứng viên bấm xin gia nhập nhóm nhưng nhóm vừa được trưởng nhóm duyệt đủ người trước đó vài giây (Race condition / Conflict Error).
-* **Nhánh phục hồi:** Hệ thống báo lỗi rõ ràng, cung cấp nút hoàn tác/reset bộ lọc và gợi ý các nhóm thay thế tương tự.
+### Flow 3: Lọc không có kết quả & Phục hồi tìm kiếm (Error & Recovery Branch)
+* **Điểm bắt đầu:** Ứng viên tại SCR-02 Discovery Feed.
+* **Mục tiêu:** Tìm kiếm nhóm dự án phù hợp; xử lý và phục hồi khi gặp lỗi không có dữ liệu.
+* **Điểm kết thúc:** 
+  * Phục hồi 1: Bộ lọc được xóa, quay lại danh sách 18 nhóm ban đầu.
+  * Phục hồi 2: Chọn nhóm từ danh sách gợi ý đề xuất tương đương.
 
 ```mermaid
 flowchart TD
-    Start([Bắt đầu: SCR-02 Discovery Feed]) --> ApplyStrictFilter[Lọc tiêu chí quá hẹp: Role Designer + Fintech + 20h/tuần]
-    ApplyStrictFilter --> CheckResult{Có kết quả phù hợp?}
-    
-    CheckResult -- Không có kết quả --> EmptyState[Hiển thị Màn hình Empty State: 'Không tìm thấy nhóm phù hợp']
-    EmptyState --> Recovery1[Nhấn nút 'Đặt lại bộ lọc']
-    Recovery1 --> ResetFilter[Hệ thống xóa bộ lọc về mặc định]
-    ResetFilter --> ShowAll[Hiển thị lại toàn bộ danh sách nhóm]
-    ShowAll --> EndRecover1([Phục hồi thành công: Người dùng tiếp tục duyệt nhóm])
+    Start([BẮT ĐẦU: SCR-02 Discovery Feed]) --> ApplyStrictFilter[Nhập từ khóa quá hẹp: 'Quantum NLP Rust']
+    ApplyStrictFilter --> CheckResult{Hệ thống kiểm tra kết quả?}
 
-    CheckResult -- Có kết quả --> SelectGroup[Chọn nhóm PaySafe]
-    SelectGroup --> ClickJoin[Bấm 'Xin gia nhập']
-    ClickJoin --> ServerValidate{Kiểm tra slot trống trên Server}
-    ServerValidate -- Đã đủ slot (0 slot trống) --> ErrorDialog[Hiển thị Error State Dialog: 'Rất tiếc! Nhóm này vừa tuyển đủ thành viên']
-    ErrorDialog --> Recovery2[Bấm nút 'Khám phá nhóm tương tự']
-    Recovery2 --> SuggestAlternative[Hệ thống tự động lọc các nhóm Fintech khác đang cần tuyển]
-    SuggestAlternative --> EndRecover2([Phục hồi thành công: Chuyển hướng tới danh sách gợi ý mới])
+    %% Nhánh lỗi (Error Branch)
+    CheckResult -- [NHÁNH LỖI] 0 nhóm tìm thấy --> EmptyState[Hiển thị SCR-08 Màn hình Empty State: 'No matching projects found']
+
+    %% Nhánh phục hồi 1 (Recovery Branch A)
+    EmptyState -- [PHỤC HỒI 1: Bấm Reset] --> ClickReset[Nhấn nút 'Reset Filters']
+    ClickReset --> ClearFilter[Hệ thống xóa bộ lọc về mặc định]
+    ClearFilter --> ShowAll[Tải lại toàn bộ danh sách 18 nhóm]
+    ShowAll --> EndRecover1([KẾT THÚC PHỤC HỒI 1: Tiếp tục khám phá feed])
+
+    %% Nhánh phục hồi 2 (Recovery Branch B)
+    EmptyState -- [PHỤC HỒI 2: Chọn Gợi ý] --> ClickSuggest[Chọn Track đề xuất: 'AI & LLM Tutoring']
+    ClickSuggest --> LoadAlternate[Hệ thống nạp nhóm EduConnect]
+    LoadAlternate --> ViewGroup[Mở chi tiết nhóm thay thế EduConnect]
+    ViewGroup --> EndRecover2([KẾT THÚC PHỤC HỒI 2: Tiếp tục luồng Flow 1])
 ```
 
 ---
