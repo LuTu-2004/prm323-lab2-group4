@@ -36,3 +36,16 @@
 | **Ảnh chụp kết quả Stitch** | [`assets/stitch/`](assets/stitch/) | Toàn bộ ảnh chụp màn hình UI do Google Stitch tạo ra |
 | **Ảnh xuất Figma Final UI** | [`assets/figma/`](assets/figma/) | Ảnh PNG export các màn hình hoàn thiện từ Figma |
 | **Đặc tả Flutter Handoff** | [`handoff/flutter-handoff.md`](handoff/flutter-handoff.md) | 6 mục đặc tả kỹ thuật từng màn hình + bảng ánh xạ Token sang Widget |
+| **Kịch bản Slide Thuyết trình (12 Slides)** | [`docs/SLIDES.md`](docs/SLIDES.md) | Kịch bản 12 slide chi tiết, phân chia 4 người nói, speaker notes và Q&A |
+| **Web Slide Tương tác & Xuất PDF** | [`docs/slides.html`](docs/slides.html) | Bản trình chiếu web chuẩn 16:9, điều hướng phím mũi tên, hỗ trợ xuất file PDF |
+
+---
+
+## 3. Hướng dẫn Thuyết trình & Live Demo (Đánh giá Lab 2)
+Tuân thủ 100% [Hướng dẫn trình bày Lab 2](https://prm393-material.web.app/lab2-presentation.html):
+* **Thời lượng:** 10 phút thuyết trình (12 slide) · 5 phút live demo Figma · 5 phút hỏi đáp Q&A.
+* **Cách mở Slide trình chiếu:**
+  * Mở trực tiếp file [`docs/slides.html`](docs/slides.html) trong Google Chrome hoặc Microsoft Edge.
+  * Phím tắt: `ArrowRight` (Tiếp), `ArrowLeft` (Lùi), `F` (Toàn màn hình), `N` (Bật/tắt lời thoại diễn giả).
+  * Nhấn nút **"🖨️ Xuất PDF"** hoặc nhấn `Ctrl + P` (chọn Save as PDF) để in ra file PDF nộp thầy nếu cần.
+

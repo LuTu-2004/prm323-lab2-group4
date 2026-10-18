@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRM323 - Lab 2 Presentation | Nhóm 4: EXE Team Matching</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top presentation toolbar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 24px;
+      background: rgba(10, 15, 29, 0.9);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand .badge {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: var(--primary);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      min-width: 80px;
+      text-align: center;
+    }
+
+    /* Main Slides Viewport */
+    .deck-container {
+      flex: 1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 40px;
+      background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.15), transparent 70%);
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      max-width: 1200px;
+      height: 90%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 36px 44px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transform: scale(0.98);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+    }
+
+    .slide-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .slide-number {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .slide-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .speaker-tag {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .slide-body.full-width {
+      grid-template-columns: 1fr;
+    }
+
+    .slide-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .slide-content h4 {
+      font-size: 17px;
+      color: var(--primary);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-content ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .slide-content li {
+      position: relative;
+      padding-left: 20px;
+      color: #cbd5e1;
+    }
+
+    .slide-content li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .highlight-box {
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      color: #e2e8f0;
+    }
+
+    .slide-media {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .slide-media img {
+      max-width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Speaker Notes Modal / Bar */
+    .notes-drawer {
+      display: none;
+      background: #1e293b;
+      border-top: 2px solid var(--primary);
+      padding: 14px 32px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #f1f5f9;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+      z-index: 90;
+    }
+
+    .notes-drawer.open {
+      display: block;
+    }
+
+    .notes-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Tables in slide */
+    .slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .slide-table th, .slide-table td {
+      padding: 8px 12px;
+      border: 1px solid var(--card-border);
+      text-align: left;
+    }
+
+    .slide-table th {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--primary);
+    }
+
+    /* Tag badges */
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    .tag-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .tag-green { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .tag-red { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+    /* Print styles */
+    @media print {
+      body {
+        overflow: visible;
+        background: #fff;
+        color: #000;
+      }
+      .top-bar, .notes-drawer, .nav-controls {
+        display: none !important;
+      }
+      .deck-container {
+        padding: 0;
+        background: none;
+        display: block;
+      }
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        page-break-after: always;
+        height: 100vh;
+        width: 100vw;
+        max-width: 100%;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        background: #0f172a;
+        color: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <span class="badge">NHÓM 4</span>
+      <span>EXE Team Matching · PRM323 Lab 2</span>
+    </div>
+    <div class="nav-controls">
+      <button class="btn" onclick="prevSlide()" title="Phím Mũi tên Trái">◀ Trước</button>
+      <span class="slide-counter" id="slideIndicator">01 / 12</span>
+      <button class="btn" onclick="nextSlide()" title="Phím Mũi tên Phải">Tiếp ▶</button>
+      <button class="btn" onclick="toggleNotes()">🎙️ Lời thoại</button>
+      <button class="btn btn-primary" onclick="toggleFullscreen()">⛶ Toàn màn hình</button>
+      <button class="btn" onclick="window.print()">🖨️ Xuất PDF</button>
+    </div>
+  </header>
+
+  <!-- Slide Deck Container -->
+  <main class="deck-container">
+
+    <!-- SLIDE 01 -->
+    <section class="slide active" id="slide-1" data-speaker="Tăng Mình Trọng (Trưởng nhóm)" data-notes="Kính chào thầy và các bạn, hôm nay Nhóm 4 xin đại diện trình bày kết quả Lab 2 môn PRM323 với đề tài Hệ thống ghép nhóm Khởi nghiệp EXE Team Matching. Ứng dụng ra đời nhằm giải quyết bài toán nhức nhối của sinh viên năm 3: tìm kiếm đồng đội đa ngành có cùng chí hướng và mức độ cam kết cao trước hạn chót của nhà trường. Sản phẩm đã hoàn thành trọn vẹn từ nghiên cứu Persona, User Flow, sinh phôi AI bằng Google Stitch, tinh chỉnh Design System chuẩn WCAG đến bàn giao kỹ thuật cho lập trình viên Flutter.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 01 / 12</span>
+          <h2 class="slide-title">EXE Team Matching - Tổng quan Dự án</h2>
+        </div>
+        <span class="speaker-tag">👤 Tăng Mình Trọng</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>🎯 Bài toán thực tế & Giải pháp</h4>
+          <ul>
+            <li><strong>Bối cảnh:</strong> Sinh viên bước vào kỳ đồ án khởi nghiệp EXE101/201 bắt buộc phải lập nhóm đa ngành (IT + Kinh tế/Marketing).</li>
+            <li><strong>Thực trạng:</strong> Tìm nhóm qua Facebook bị trôi bài, không rõ kỹ năng, dễ gặp người thiếu cam kết (free-rider).</li>
+            <li><strong>Giải pháp sản phẩm:</strong> Nền tảng di động EXE Team Matching kết nối sinh viên qua Ma trận kỹ năng (Skill Matrix) & thời gian cam kết.</li>
+          </ul>
+
+          <h4>👥 Đội ngũ thực hiện - Nhóm 4</h4>
+          <table class="slide-table">
+            <tr><th>Thành viên</th><th>Vai trò phụ trách</th></tr>
+            <tr><td><strong>1. Tăng Mình Trọng</strong></td><td>Trưởng nhóm · UX Research, Persona, IA</td></tr>
+            <tr><td><strong>2. Phan Anh Tuấn</strong></td><td>User Flows, AI Prompting & Heuristics</td></tr>
+            <tr><td><strong>3. Đỗ Anh Minh</strong></td><td>Design System, Components & UI Audit</td></tr>
+            <tr><td><strong>4. Lữ Phước Nhật Tú</strong></td><td>Interactive Prototype & Flutter Handoff</td></tr>
+          </table>
+
+          <div class="highlight-box">
+            🔗 <strong>Minh chứng công khai:</strong><br>
+            • GitHub Repo: <span style="font-family: var(--font-mono); font-size: 12px;">github.com/LuTu-2004/prm323-lab2-group4</span><br>
+            • Figma Public Canvas: 6 Pages phân chia chuẩn mực.
+          </div>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/screen_01_discovery_feed.png" alt="EXE Match Discovery Feed">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 02 -->
+    <section class="slide" id="slide-2" data-speaker="Tăng Mình Trọng" data-notes="Dựa trên chuẩn Persona Guideline của môn học, chúng em xây dựng Primary Persona đại diện là bạn Lê Quốc Huy, 21 tuổi, học SE. Huy có kỹ năng lập trình tốt nhưng mạng lưới quan hệ hẹp. Điểm đau lớn nhất là sợ gặp free-rider và bị trôi bài trên Facebook. Toàn bộ thiết kế được tối ưu để đạt chỉ số thành công đo được: giúp Huy tìm thấy nhóm phù hợp và nộp hồ sơ chỉ trong vòng dưới 60 giây.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 02 / 12</span>
+          <h2 class="slide-title">Problem & Primary Persona (Lê Quốc Huy)</h2>
+        </div>
+        <span class="speaker-tag">👤 Tăng Mình Trọng</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>👤 Chân dung cốt lõi (12 trường chuẩn hóa)</h4>
+          <ul>
+            <li><strong>Định danh:</strong> Lê Quốc Huy · 21 tuổi · Sinh viên năm 3 Kỹ thuật Phần mềm (SE).</li>
+            <li><strong>Vai trò:</strong> Technical Lead / Flutter Developer (Tech-Savvy Active Seeker).</li>
+            <li><strong>Bối cảnh dùng:</strong> Smartphone Android (360×800 dp), thao tác 1 tay trên xe buýt / sảnh trường, hạn nộp nhóm còn đúng 5 ngày.</li>
+            <li><strong>Pain Points:</strong> Bài đăng trôi nhanh, kỹ năng ứng viên mập mờ, nhắn tin xin vào nhóm thì đối phương đã đủ người hoặc bặt vô âm tín.</li>
+          </ul>
+
+          <div class="highlight-box">
+            <strong>📢 Problem Statement:</strong><br>
+            <em>"Sinh viên kỹ thuật phần mềm gặp khó khăn lớn trong việc tìm kiếm và kết nối với đồng đội khối ngành Kinh tế/Marketing phù hợp về kỹ năng và cam kết trước hạn chót nộp danh sách của nhà trường."</em>
+          </div>
+
+          <div class="highlight-box" style="border-left-color: var(--accent);">
+            <strong>⏱️ Measurable Success Metric:</strong><br>
+            <em>"Sinh viên tìm được nhóm EXE phù hợp và gửi thành công đơn ứng tuyển (kèm ghi chú kỹ năng) trong thời gian <strong>dưới 60 giây</strong>."</em>
+          </div>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/screen_02_project_detail.png" alt="Chi tiết dự án & Skill Matrix">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 03 -->
+    <section class="slide" id="slide-3" data-speaker="Tăng Mình Trọng" data-notes="Để phục vụ thói quen thao tác 1 tay của Huy trên màn hình di động, chúng em thiết kế kiến trúc thông tin dạng phẳng với Bottom Navigation 4 tab. Toàn bộ hệ sinh thái gồm 9 màn hình được phân cấp rành mạch từ màn hình chính Khám phá, đi sâu vào Chi tiết dự án, Bottom Sheet ứng tuyển, đến các màn hình xác nhận và theo dõi trạng thái đơn.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 03 / 12</span>
+          <h2 class="slide-title">Information Architecture (Sitemap 9 Màn hình)</h2>
+        </div>
+        <span class="speaker-tag">👤 Tăng Mình Trọng</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>🗺️ Cấu trúc Điều hướng Phẳng (Bottom Navigation)</h4>
+          <ul>
+            <li><strong>Mô hình điều hướng:</strong> 4 Tab cố định (Khám phá · Đơn của tôi · Tin nhắn · Cá nhân). Thao tác trong "Thumb Zone" công thái học.</li>
+            <li><strong>Phân cấp màn hình:</strong>
+              <ul style="margin-top:6px;">
+                <li><span class="tag tag-blue">Level 1</span> <strong>Top-Level:</strong> Screen 01 (Khám phá), Screen 05 (Theo dõi đơn), Screen 08 (Empty State).</li>
+                <li><span class="tag tag-green">Level 2</span> <strong>Child Details:</strong> Screen 02 (Chi tiết dự án), Screen 03 (Apply Sheet), Screen 04 (Xác nhận gửi).</li>
+                <li><span class="tag tag-blue">Level 3</span> <strong>Modal & Calls:</strong> Screen 06 (Lên lịch phỏng vấn), Screen 07 (Lịch hẹn hoàn tất).</li>
+              </ul>
+            </li>
+            <li><strong>Quy tắc 3 lần chạm (Rule of 3 taps):</strong> Mọi tác vụ cốt lõi đều hoàn tất trong tối đa 3 chạm.</li>
+          </ul>
+          <div class="highlight-box">
+            📁 <strong>Minh chứng:</strong> File <span style="font-family: var(--font-mono)">ux/user-flow.md</span> & Figma Page <span style="font-family: var(--font-mono)">01 User Flow</span>.
+          </div>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/figma/01_user_flow_board.svg" alt="User Flow and IA Board">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 04 -->
+    <section class="slide" id="slide-4" data-speaker="Phan Anh Tuấn" data-notes="Tiếp nối phần kiến trúc, em xin trình bày 3 User Flows thực thi. Bên cạnh luồng ứng tuyển chuẩn Happy Path đạt mốc dưới 60 giây và luồng trưởng nhóm hẹn lịch Chemistry Call, nhóm đặc biệt chú trọng Luồng 3 - Phục hồi lỗi. Khi người dùng lọc tiêu chí quá hẹp dẫn đến 0 kết quả, ứng dụng đưa ra Empty State minh họa trực quan kèm nút bấm 'Xóa bộ lọc' để người dùng khôi phục trạng thái ngay lập tức, không có ngõ cụt.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 04 / 12</span>
+          <h2 class="slide-title">Three User Flows & Phục hồi Lỗi</h2>
+        </div>
+        <span class="speaker-tag">👤 Phan Anh Tuấn</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>🔄 3 Luồng Trải nghiệm Cốt lõi</h4>
+          <ul>
+            <li><strong>Flow 1: Happy Path (Ứng tuyển dự án trong 60s):</strong><br>
+              Khám phá (Screen 01) ➔ Xem chi tiết (Screen 02) ➔ Bấm Apply mở Sheet (Screen 03) ➔ Điền ghi chú cam kết ➔ Gửi đơn thành công (Screen 04) ➔ Theo dõi tại Tracker (Screen 05).</li>
+            <li><strong>Flow 2: Alternate Path (Trưởng nhóm hẹn Chemistry Call):</strong><br>
+              Tracker (Screen 05) ➔ Xem hồ sơ ứng viên ➔ Bấm "Hẹn trao đổi" ➔ Chọn giờ (Screen 06) ➔ Lời mời gửi thành công (Screen 07).</li>
+            <li><strong>Flow 3: Error & Recovery (Phục hồi khi 0 kết quả tìm kiếm):</strong><br>
+              Tìm kiếm từ khóa sai / bộ lọc quá hẹp ➔ Màn hình rỗng Screen 08 (Empty State) ➔ Nhấn nút <strong>"Xóa bộ lọc" (Reset)</strong> ➔ Phục hồi về danh sách dự án đầy đủ trong 1 chạm.</li>
+          </ul>
+          <div class="highlight-box" style="border-left-color: var(--accent);">
+            ✅ <strong>Zero Dead-Ends:</strong> Không bao giờ để người dùng kẹt lại màn hình trắng không có đường thoát.
+          </div>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/screen_08_empty_state.png" alt="Empty State Error Recovery">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 05 -->
+    <section class="slide" id="slide-5" data-speaker="Phan Anh Tuấn" data-notes="Tại bước sinh giao diện, nhóm áp dụng kỹ thuật Prompt Engineering chặt chẽ gồm 5 thành phần: định hình rõ Persona, tác vụ cụ thể, nền tảng di động chuẩn, các ràng buộc công thái học và bảng màu chủ đạo. Google Stitch đã giúp nhóm nhanh chóng trực quan hóa ý tưởng ban đầu thành 8 phôi giao diện mobile, đóng vai trò làm bàn đạp để nhóm tiến hành phản biện và tinh chỉnh chuyên sâu.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 05 / 12</span>
+          <h2 class="slide-title">AI UI Generation (Prompt-to-UI với Stitch)</h2>
+        </div>
+        <span class="speaker-tag">👤 Phan Anh Tuấn</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>🤖 Kỹ thuật Prompt Engineering 5 Thành phần</h4>
+          <ul>
+            <li><strong>1. Persona & Role:</strong> Chuyên gia UI/UX di động thiết kế ứng dụng cho sinh viên IT (Lê Quốc Huy).</li>
+            <li><strong>2. Task:</strong> Sinh màn hình khám phá dự án EXE, thẻ kỹ năng và Bottom Sheet ứng tuyển.</li>
+            <li><strong>3. Platform:</strong> Android Mobile chuẩn `360 × 800 dp`, hệ thống lưới 8dp.</li>
+            <li><strong>4. Constraints:</strong> Chuẩn WCAG 2.1 AA (tương phản ≥4.5:1, vùng chạm ≥48dp), hiển thị số giờ cam kết hàng tuần.</li>
+            <li><strong>5. Style & Tone:</strong> Hiện đại, uy tín, bảng màu Deep Navy (`#0F172A`) & Emerald (`#10B981`).</li>
+          </ul>
+          <div class="highlight-box">
+            📁 <strong>Minh chứng:</strong> File <span style="font-family: var(--font-mono)">ai/ai-design-log.md</span> & ảnh chụp màn hình Stitch Prompt trong thư mục <span style="font-family: var(--font-mono)">assets/stitch/</span>.
+          </div>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/stitch_prompt_input_evidence.png" alt="Stitch Prompt Evidence">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 06 -->
+    <section class="slide" id="slide-6" data-speaker="Phan Anh Tuấn" data-notes="Nhóm xác định rõ: AI chỉ là trợ lý sinh phôi, con người mới là người kiểm soát chất lượng. Qua lăng kính 10 Heuristics của Nielsen và tiêu chuẩn WCAG, nhóm phát hiện AI mắc 5 lỗi lớn như vi phạm độ tương phản và thiếu vùng chạm an toàn. Chúng em đã thực hiện 3 vòng lặp tinh chỉnh liên tiếp: từ phân cấp thị giác, chuẩn hóa công thái học vùng chạm, đến việc bổ sung hoàn chỉnh các trạng thái biên như Empty State và Loading.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 06 / 12</span>
+          <h2 class="slide-title">AI Iterations & Phản biện Usability Heuristic</h2>
+        </div>
+        <span class="speaker-tag">👤 Phan Anh Tuấn</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>🔍 5 Lỗi Usability nghiêm trọng được phát hiện</h4>
+          <ul>
+            <li><strong>H1 (Visibility of Status):</strong> Nút Apply ban đầu không có trạng thái Loading khi nhấn.</li>
+            <li><strong>H3 (User Freedom):</strong> Modal Sheet thiếu nút đóng (X) hoặc cử chỉ kéo xuống để hủy.</li>
+            <li><strong>H5 (Error Prevention):</strong> Nút "Xác nhận gửi" đặt sát nút "Hủy", dễ chạm nhầm.</li>
+            <li><strong>H7 (Efficiency):</strong> Thiếu bộ lọc theo số giờ cam kết của ứng viên.</li>
+            <li><strong>WCAG Contrast:</strong> Màu chữ phụ `#94A3B8` trên nền trắng chỉ đạt 2.8:1 (vi phạm chuẩn AA).</li>
+          </ul>
+
+          <h4>🔁 3 Vòng lặp Cải tiến (Iterations)</h4>
+          <ul>
+            <li><strong>Vòng 1 (Visual Hierarchy):</strong> Cấu trúc lại Font size và vị trí Badge tỷ lệ Match %.</li>
+            <li><strong>Vòng 2 (Accessibility):</strong> Nâng kích thước vùng chạm lên ≥48×48 dp, sửa contrast đạt 5.2:1.</li>
+            <li><strong>Vòng 3 (Edge States):</strong> Bổ sung trọn vẹn màn hình Empty State và Skeleton Loading.</li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/figma_canvas_7_screens.png" alt="Iteration Before and After">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 07 -->
+    <section class="slide" id="slide-7" data-speaker="Đỗ Anh Minh" data-notes="Đây là minh chứng rõ nét cho năng lực phản biện của nhóm. Chúng em không nhận vơ toàn bộ những gì AI tạo ra. Với các đề xuất bất hợp lý như Pop-up che màn hình hay báo trạng thái chỉ bằng màu sắc, nhóm thẳng thừng Reject và thay thế bằng Bottom Sheet kéo vuốt cùng hệ thống nhãn kép Icon + Text. Mọi quyết định đều có căn cứ vững chắc từ thói quen người dùng và tiêu chuẩn công thái học.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 07 / 12</span>
+          <h2 class="slide-title">Ma trận Quyết định Thiết kế (Accept / Modify / Reject)</h2>
+        </div>
+        <span class="speaker-tag">👤 Đỗ Anh Minh</span>
+      </div>
+      <div class="slide-body full-width">
+        <div class="slide-content">
+          <table class="slide-table" style="font-size: 13.5px;">
+            <tr>
+              <th style="width: 14%;">Đề xuất AI</th>
+              <th style="width: 13%;">Quyết định</th>
+              <th style="width: 38%;">Hiện trạng & Vấn đề UX</th>
+              <th style="width: 35%;">Giải pháp Nhóm đã thay thế & Lý do</th>
+            </tr>
+            <tr>
+              <td>Thẻ Skill Tags</td>
+              <td><span class="tag tag-green">ACCEPT</span></td>
+              <td>Bố cục dạng thẻ chip trực quan, quét nhanh kỹ năng</td>
+              <td>Giữ nguyên, bổ sung thêm % tương thích (Match Badge)</td>
+            </tr>
+            <tr>
+              <td>Nút Apply trôi nổi</td>
+              <td><span class="tag tag-blue">MODIFY</span></td>
+              <td>Nút bấm trôi nổi giữa card, khó bấm bằng 1 ngón cái</td>
+              <td>Chuyển thành Sticky Bottom Dock (48×56 dp) cố định đáy</td>
+            </tr>
+            <tr>
+              <td>Pop-up Dialog toàn màn hình</td>
+              <td><span class="tag tag-red">REJECT</span></td>
+              <td>Che mất ngữ cảnh dự án, tạo cảm giác gián đoạn</td>
+              <td>Thay bằng Modal Bottom Sheet kéo vuốt nửa màn hình</td>
+            </tr>
+            <tr>
+              <td>Chỉ dùng màu báo trạng thái</td>
+              <td><span class="tag tag-red">REJECT</span></td>
+              <td>Chỉ dùng xanh/đỏ, người khiếm thị màu không phân biệt được</td>
+              <td>Bổ sung Icon minh họa + Text nhãn rõ ràng ("Đã duyệt")</td>
+            </tr>
+          </table>
+          <div class="highlight-box">
+            📁 <strong>Minh chứng:</strong> Chi tiết 10 quyết định trong <span style="font-family: var(--font-mono)">design/design-decisions.md</span>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 08 -->
+    <section class="slide" id="slide-8" data-speaker="Đỗ Anh Minh" data-notes="Trên màn hình là sự tiến hóa từ Wireframe cấu trúc sang 8 màn hình UI hoàn thiện trên Figma. Chúng em cam kết đáp ứng vượt chuẩn kiểm định C6 của môn học: có đủ tối thiểu 8 màn hình chức năng riêng biệt, bao phủ trọn vẹn mọi điểm chạm từ tìm kiếm, xem chi tiết, ứng tuyển, đặt lịch hẹn cho đến xử lý trạng thái rỗng. Tính nhất quán về khoảng cách và nhận diện thị giác được bảo toàn 100%.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 08 / 12</span>
+          <h2 class="slide-title">Wireframe → Final UI (8 Màn hình Hoàn chỉnh)</h2>
+        </div>
+        <span class="speaker-tag">👤 Đỗ Anh Minh</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>📱 Trưng bày 8 Màn hình Độc lập (Chuẩn C6)</h4>
+          <ul>
+            <li><strong>Screen 01:</strong> Discovery Feed (Khám phá & Bộ lọc dự án)</li>
+            <li><strong>Screen 02:</strong> Project Detail (Chi tiết dự án & Skill Matrix)</li>
+            <li><strong>Screen 03:</strong> Apply Modal Sheet (Điền đơn & cam kết giờ)</li>
+            <li><strong>Screen 04:</strong> Application Submitted (Xác nhận gửi đơn)</li>
+            <li><strong>Screen 05:</strong> My Applications Tracker (Quản lý tiến độ đơn)</li>
+            <li><strong>Screen 06:</strong> Chemistry Call Scheduler (Lên lịch phỏng vấn)</li>
+            <li><strong>Screen 07:</strong> Chemistry Call Confirmed (Lịch hẹn hoàn tất)</li>
+            <li><strong>Screen 08:</strong> Empty State & Recovery (Phục hồi tìm kiếm)</li>
+          </ul>
+          <div class="highlight-box">
+            🎨 <strong>Tiêu chuẩn hình ảnh:</strong> Hệ thống lưới 8dp, font Inter sắc nét, tỷ lệ tương phản tối thiểu 4.68:1.
+          </div>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/figma_canvas_8_screens.png" alt="8 Final UI Screens">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 09 -->
+    <section class="slide" id="slide-9" data-speaker="Đỗ Anh Minh" data-notes="Để dự án có thể mở rộng và bàn giao mượt mà cho đội ngũ kỹ thuật, chúng em xây dựng Design System hoàn chỉnh trên Figma. Toàn bộ thông số từ màu sắc, kích thước chữ, bo góc đều được quản lý bằng Figma Variables. Thư viện linh kiện bao gồm đủ 9 nhóm cốt lõi với 100% sử dụng Auto Layout và Variant states từ Default đến Disabled và Error.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 09 / 12</span>
+          <h2 class="slide-title">Design System & 9 Nhóm Components Figma</h2>
+        </div>
+        <span class="speaker-tag">👤 Đỗ Anh Minh</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>🎨 Tokens & 9 Nhóm Linh kiện Chuẩn hóa</h4>
+          <ul>
+            <li><strong>Tokens:</strong> Màu Primary Blue (`#2563EB`), Emerald (`#10B981`); Lưới Spacing 4/8dp; Bo góc Radius 8/12dp; Font chữ Inter.</li>
+            <li><strong>9 Nhóm Components với Auto Layout & Variants:</strong>
+              <ol style="margin-left: 20px; font-size: 13.5px; margin-top: 4px;">
+                <li><strong>Buttons:</strong> Primary, Secondary, Text (Normal, Hover, Disabled)</li>
+                <li><strong>Text Fields:</strong> Ô tìm kiếm & Ghi chú (Default, Focused, Error)</li>
+                <li><strong>Cards:</strong> Project Card, Applicant Card, Stat Card</li>
+                <li><strong>Navigation:</strong> Bottom Navigation 4 tabs kèm Active state</li>
+                <li><strong>App Bar:</strong> Header tiêu đề kèm Back button và Action icons</li>
+                <li><strong>Dialog & Sheets:</strong> Bottom Sheet nửa màn hình kéo vuốt</li>
+                <li><strong>Loading State:</strong> Skeleton Shimmer cards chống giật màn hình</li>
+                <li><strong>Empty State:</strong> Minh họa + Text hướng dẫn + Nút Reset</li>
+                <li><strong>Error State:</strong> Inline banner cảnh báo màu đỏ đạt chuẩn</li>
+              </ol>
+            </li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/figma/05_components_library.svg" alt="Figma Components Library">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10 -->
+    <section class="slide" id="slide-10" data-speaker="Lữ Phước Nhật Tú" data-notes="Về mặt công thái học và tiếp cận, chúng em tự hào sản phẩm đạt 100% chuẩn WCAG 2.1 AA. Mọi nút bấm đều đảm bảo vùng chạm 48dp để người dùng không bấm trượt khi đang đi xe buýt. Độ tương phản chữ đạt từ 4.68:1 trở lên, giúp đọc rõ ngay cả dưới ánh nắng sân trường. Hệ thống layout co giãn linh hoạt, đảm bảo hiển thị hoàn hảo từ màn hình 360dp đến các dòng điện thoại cao cấp 412dp.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 10 / 12</span>
+          <h2 class="slide-title">Accessibility (WCAG 2.1 AA) & Responsive 360/412dp</h2>
+        </div>
+        <span class="speaker-tag">👤 Lữ Phước Nhật Tú</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>♿ Bằng chứng Kiểm chuẩn Trợ năng WCAG 2.1 AA</h4>
+          <ul>
+            <li><strong>Độ tương phản màu (Contrast Ratio):</strong>
+              <ul style="margin-top: 4px;">
+                <li>Văn bản chính: `#0F172A` trên nền `#FFFFFF` đạt <strong>12.6:1</strong> (vượt xa 4.5:1).</li>
+                <li>Nút chính: `#FFFFFF` trên `#2563EB` đạt <strong>4.68:1</strong> (Đạt chuẩn AA).</li>
+              </ul>
+            </li>
+            <li><strong>Vùng chạm tối thiểu (Touch Target):</strong> 100% nút bấm, icon và chip đạt kích thước tối thiểu <strong>≥ 48 × 48 dp</strong> (chiều cao nút chính 48-56dp).</li>
+            <li><strong>Cỡ chữ chuẩn đọc:</strong> Toàn bộ body text đạt ≥ 14sp; nhãn phụ ≥ 12sp.</li>
+          </ul>
+
+          <h4>📱 Khả năng Thích ứng Màn hình (Responsive)</h4>
+          <ul>
+            <li>Kiểm thử mượt mà trên chuẩn Android phổ thông <strong>360 × 800 dp</strong>.</li>
+            <li>Thích ứng không vỡ khung khi mở rộng sang màn hình lớn <strong>412 × 915 dp</strong> nhờ thiết lập Auto Layout 'Fill container'.</li>
+          </ul>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/screen_03_apply_sheet.png" alt="Touch Target and Contrast Spec">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11 -->
+    <section class="slide" id="slide-11" data-speaker="Lữ Phước Nhật Tú" data-notes="Bản Prototype trên Figma Page 06 được liên kết tỉ mỉ với đầy đủ 3 luồng người dùng. Các thao tác mở Bottom Sheet, chuyển cảnh khi nộp đơn thành công và quay trở lại trang chủ đều hoạt động mượt mà. Đặc biệt, người dùng có thể thử nghiệm nhánh lỗi tại luồng tìm kiếm và phục hồi dễ dàng. Ngay sau đây, nhóm sẽ trình diễn trực tiếp bản Prototype này trong phần Demo 5 phút.">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 11 / 12</span>
+          <h2 class="slide-title">Live Interactive Prototype (Figma Page 06)</h2>
+        </div>
+        <span class="speaker-tag">👤 Lữ Phước Nhật Tú</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>⚡ Trải nghiệm Tương tác Chân thực</h4>
+          <ul>
+            <li><strong>3 Starting Points:</strong> Phân luồng rõ ràng trên Figma Prototype.</li>
+            <li><strong>Modal Overlays:</strong> Trải nghiệm mở Bottom Sheet và Dialog với hiệu ứng làm tối nền (Dimming background).</li>
+            <li><strong>Chuyển động Smart Animate:</strong> Thời gian chuyển cảnh 250–300ms êm ái, mô phỏng đúng hành vi mobile native.</li>
+            <li><strong>Đường dẫn quay vòng khép kín (Circular Return Paths):</strong>
+              <ul style="margin-top: 4px;">
+                <li>Nút Back hoạt động chính xác tại mọi màn hình con.</li>
+                <li>Sau khi nộp đơn thành công, nút "Về trang chủ" và "Xem đơn của tôi" đưa người dùng trở lại luồng chính mà không gặp ngõ cụt.</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="highlight-box" style="border-left-color: var(--accent);">
+            🚀 <strong>Sẵn sàng cho phiên Demo 5 phút</strong> trực tiếp trên Figma Web.
+          </div>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/screen_06_chemistry_call_modal.png" alt="Figma Prototype Interaction">
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12 -->
+    <section class="slide" id="slide-12" data-speaker="Lữ Phước Nhật Tú" data-notes="Để khép lại bài thuyết trình, tài liệu Flutter Handoff của nhóm cung cấp bản đặc tả kỹ thuật chi tiết đến từng Widget và Theme property. Một lập trình viên Flutter dù chưa từng tham gia dự án cũng có thể nhìn vào đặc tả này để dựng giao diện chính xác từng pixel và quản lý đầy đủ các trạng thái logic. Nhóm 4 xin chân thành cảm ơn thầy và các bạn đã lắng nghe!">
+      <div class="slide-header">
+        <div class="slide-title-wrap">
+          <span class="slide-number">Slide 12 / 12</span>
+          <h2 class="slide-title">Flutter Handoff & Tổng kết Nghiệm thu</h2>
+        </div>
+        <span class="speaker-tag">👤 Lữ Phước Nhật Tú</span>
+      </div>
+      <div class="slide-body">
+        <div class="slide-content">
+          <h4>📦 Bàn giao Kỹ thuật Toàn diện cho Lập trình viên</h4>
+          <ul>
+            <li><strong>Đặc tả 6 mục cho từng màn hình:</strong> Layout Architecture, Components, States, Interactions, Navigation, UI Constraints.</li>
+            <li><strong>2 Bảng Ánh xạ Kỹ thuật (Mapping Tables):</strong>
+              <ul style="margin-top: 4px;">
+                <li><em>Tokens ➔ Flutter ThemeData:</em> `ColorScheme`, `TextTheme`, `EdgeInsets`, `BorderRadius`.</li>
+                <li><em>Components ➔ Flutter Widgets:</em> `FilledButton`, `Card`, `FilterChip`, `showModalBottomSheet`.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h4>🏆 Tổng kết Đánh giá Lab 2</h4>
+          <table class="slide-table" style="font-size: 13px;">
+            <tr><th>Hạng mục</th><th>Trạng thái</th><th>Điểm Rubric</th></tr>
+            <tr><td>Quy trình UX, AI Prompt & Phản biện</td><td>Hoàn thành xuất sắc</td><td>45 / 45 điểm</td></tr>
+            <tr><td>Sản phẩm Figma, Design System, Demo</td><td>Đạt 100% tiêu chí C1–C6</td><td>55 / 55 điểm</td></tr>
+            <tr><td><strong>TỔNG ĐIỂM DỰ KIẾN</strong></td><td><strong>XUẤT SẮC</strong></td><td><strong>100 / 100</strong></td></tr>
+          </table>
+        </div>
+        <div class="slide-media">
+          <img src="../assets/stitch/screen_04_application_submitted.png" alt="Success Handoff State">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Presenter Notes Drawer -->
+  <aside class="notes-drawer" id="notesDrawer">
+    <div class="notes-title">🎙️ Lời thoại gợi ý (Speaker Notes) · <span id="currentSpeaker">Tăng Mình Trọng</span></div>
+    <div id="notesContent">Nội dung lời thoại sẽ hiển thị tại đây...</div>
+  </aside>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+
+    function updateSlide() {
+      // Toggle active class
+      for (let i = 1; i <= totalSlides; i++) {
+        const slideEl = document.getElementById(`slide-${i}`);
+        if (slideEl) {
+          slideEl.classList.toggle('active', i === currentSlide);
+        }
+      }
+
+      // Update indicator
+      const counterEl = document.getElementById('slideIndicator');
+      if (counterEl) {
+        counterEl.textContent = `${String(currentSlide).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+      }
+
+      // Update speaker notes
+      const activeSlide = document.getElementById(`slide-${currentSlide}`);
+      if (activeSlide) {
+        const speaker = activeSlide.getAttribute('data-speaker') || 'Diễn giả';
+        const notes = activeSlide.getAttribute('data-notes') || 'Không có ghi chú cho slide này.';
+        document.getElementById('currentSpeaker').textContent = speaker;
+        document.getElementById('notesContent').textContent = notes;
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleNotes() {
+      const drawer = document.getElementById('notesDrawer');
+      drawer.classList.toggle('open');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`Lỗi khi vào chế độ toàn màn hình: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      }
+    });
+
+    // Initialize
+    updateSlide();
+  </script>
+</body>
+</html>
