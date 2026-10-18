@@ -38,6 +38,7 @@
 | **Đặc tả Flutter Handoff** | [`handoff/flutter-handoff.md`](handoff/flutter-handoff.md) | 6 mục đặc tả kỹ thuật từng màn hình + bảng ánh xạ Token sang Widget |
 | **Kịch bản Slide Thuyết trình (12 Slides)** | [`docs/SLIDES.md`](docs/SLIDES.md) | Kịch bản 12 slide chi tiết, phân chia 4 người nói, speaker notes và Q&A |
 | **Web Slide Tương tác & Xuất PDF** | [`docs/slides.html`](docs/slides.html) | Bản trình chiếu web chuẩn 16:9, điều hướng phím mũi tên, hỗ trợ xuất file PDF |
+| **File Slide PowerPoint (.pptx)** | [`docs/PRM323_Lab2_Nhom4_Slides.pptx`](docs/PRM323_Lab2_Nhom4_Slides.pptx) | File PowerPoint 12 slide nhúng sẵn ảnh, kéo thả nhập trực tiếp vào Canva trong 3s |
 
 ---
 
