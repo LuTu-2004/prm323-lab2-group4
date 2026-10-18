@@ -285,7 +285,7 @@ def create_flawless_deck():
                     ]
                 }
             ],
-            "image": os.path.join(stitch_dir, "figma_canvas_8_screens.png"),
+            "image": os.path.join(stitch_dir, "screens_8_showcase_wide.png"),
             "notes": "Hệ thống bao gồm đủ 8 màn hình chức năng riêng biệt, bao phủ trọn vẹn toàn bộ hành trình trải nghiệm mà không có màn hình nào bị ngõ cụt."
         },
         {
@@ -536,19 +536,26 @@ def create_flawless_deck():
                 try:
                     with Image.open(img_path) as im:
                         orig_w, orig_h = im.size
+                        if orig_h / orig_w > 2.2:
+                            crop_h = int(orig_w * 2.05)
+                            cropped_im = im.crop((0, 0, orig_w, crop_h))
+                            crop_path = img_path.replace(".png", "_crop_fold.png")
+                            cropped_im.save(crop_path)
+                            actual_img_path = crop_path
+                            orig_w, orig_h = cropped_im.size
+                        else:
+                            actual_img_path = img_path
                     
-                    # Target height is 5.2 inches (never cut off!)
-                    target_h = Inches(5.2)
+                    target_h = Inches(5.1)
                     target_w = target_h * (orig_w / orig_h)
-                    
-                    if target_w > Inches(2.8):
-                        target_w = Inches(2.8)
-                        target_h = target_w * (orig_h / orig_w)
+                    if target_w > Inches(2.75):
+                        target_w = Inches(2.75)
+                        target_h = target_w * (orig_w / orig_h)
 
                     img_x = right_x + (right_width - target_w) / 2
                     img_y = Inches(1.55) + (right_h - target_h) / 2
 
-                    slide.shapes.add_picture(img_path, img_x, img_y, width=target_w, height=target_h)
+                    slide.shapes.add_picture(actual_img_path, img_x, img_y, width=target_w, height=target_h)
                 except Exception as e:
                     print(f"Error adding phone picture {img_path}: {e}")
 

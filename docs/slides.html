@@ -125,12 +125,13 @@
     .slide {
       position: absolute;
       width: 100%;
-      max-width: 1200px;
-      height: 90%;
+      max-width: 1240px;
+      height: 92%;
+      max-height: calc(100vh - 80px);
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 36px 44px;
+      padding: 24px 36px;
       backdrop-filter: blur(16px);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
       display: none;
@@ -151,9 +152,9 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 16px;
+      padding-bottom: 12px;
     }
 
     .slide-title-wrap {
@@ -171,7 +172,7 @@
     }
 
     .slide-title {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.5px;
       color: #fff;
@@ -190,25 +191,32 @@
     .slide-body {
       flex: 1;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.4fr 320px;
       gap: 28px;
       align-items: center;
     }
 
+    .slide-body.wide-layout {
+      grid-template-columns: 1fr 1fr;
+    }
+
     .slide-body.full-width {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
     }
 
     .slide-content {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      font-size: 15px;
-      line-height: 1.6;
+      gap: 12px;
+      font-size: 14.5px;
+      line-height: 1.55;
     }
 
     .slide-content h4 {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--primary);
       font-weight: 700;
       display: flex;
@@ -220,7 +228,7 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .slide-content li {
@@ -241,9 +249,9 @@
     .highlight-box {
       background: rgba(59, 130, 246, 0.1);
       border-left: 4px solid var(--primary);
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 0 8px 8px 0;
-      font-size: 14px;
+      font-size: 13.5px;
       color: #e2e8f0;
     }
 
@@ -252,19 +260,156 @@
       justify-content: center;
       align-items: center;
       height: 100%;
-      background: rgba(0, 0, 0, 0.3);
+      background: transparent;
+      border: none;
+      padding: 0;
+      overflow: visible;
+    }
+
+    /* Modern Smartphone Device Mockup - Scaled Large & Crisp */
+    .phone-mockup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #0f172a;
+      border: 5px solid #334155;
+      border-radius: 36px;
+      padding: 10px 8px 14px 8px;
+      box-shadow: 0 20px 50px -6px rgba(0, 0, 0, 0.8), 0 0 35px rgba(59, 130, 246, 0.35);
+      width: 270px;
+      height: 500px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    .phone-mockup:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 26px 60px -6px rgba(0, 0, 0, 0.9), 0 0 45px rgba(59, 130, 246, 0.5);
+    }
+
+    .phone-mockup::before {
+      content: "";
+      width: 50px;
+      height: 4px;
+      background: #475569;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .phone-mockup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 24px;
+      display: block;
+      transition: object-position 3.5s ease-in-out;
+    }
+
+    .phone-mockup:hover img {
+      object-position: bottom;
+    }
+
+    /* Wide Media Card (for diagrams, components, boards) */
+    .wide-media-card {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.7);
       border-radius: 12px;
       border: 1px solid var(--card-border);
-      padding: 12px;
+      padding: 10px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .wide-media-card img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .wide-media-card:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Slide 8: 8 Screens Showcase */
+    .screens-badges-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .feature-pill {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .screens-grid-8 {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+
+    .mini-screen-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 6px 4px 8px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
       overflow: hidden;
     }
 
-    .slide-media img {
+    .mini-screen-card:hover {
+      transform: translateY(-8px) scale(1.08);
+      border-color: var(--primary);
+      box-shadow: 0 16px 32px rgba(37, 99, 235, 0.4);
+      z-index: 10;
+      background: rgba(30, 41, 59, 0.95);
+    }
+
+    .mini-screen-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 6px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       max-width: 100%;
-      max-height: 420px;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .mini-screen-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 6px;
+      display: block;
+      transition: object-position 3s ease-in-out;
+    }
+
+    .mini-screen-card:hover img {
+      object-position: bottom;
     }
 
     /* Speaker Notes Modal / Bar */
@@ -412,7 +557,9 @@
           </div>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/screen_01_discovery_feed.png" alt="EXE Match Discovery Feed">
+          <div class="phone-mockup">
+            <img src="../assets/stitch/screen_01_discovery_feed.png" alt="EXE Match Discovery Feed">
+          </div>
         </div>
       </div>
     </section>
@@ -447,7 +594,9 @@
           </div>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/screen_02_project_detail.png" alt="Chi tiết dự án & Skill Matrix">
+          <div class="phone-mockup">
+            <img src="../assets/stitch/screen_02_project_detail.png" alt="Chi tiết dự án & Skill Matrix">
+          </div>
         </div>
       </div>
     </section>
@@ -461,7 +610,7 @@
         </div>
         <span class="speaker-tag">👤 Tăng Mình Trọng</span>
       </div>
-      <div class="slide-body">
+      <div class="slide-body wide-layout">
         <div class="slide-content">
           <h4>🗺️ Cấu trúc Điều hướng Phẳng (Bottom Navigation)</h4>
           <ul>
@@ -480,7 +629,9 @@
           </div>
         </div>
         <div class="slide-media">
-          <img src="../assets/figma/01_user_flow_board.svg" alt="User Flow and IA Board">
+          <div class="wide-media-card">
+            <img src="../assets/figma/01_user_flow_board.svg" alt="User Flow and IA Board">
+          </div>
         </div>
       </div>
     </section>
@@ -510,7 +661,9 @@
           </div>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/screen_08_empty_state.png" alt="Empty State Error Recovery">
+          <div class="phone-mockup">
+            <img src="../assets/stitch/screen_08_empty_state.png" alt="Empty State Error Recovery">
+          </div>
         </div>
       </div>
     </section>
@@ -524,7 +677,7 @@
         </div>
         <span class="speaker-tag">👤 Phan Anh Tuấn</span>
       </div>
-      <div class="slide-body">
+      <div class="slide-body wide-layout">
         <div class="slide-content">
           <h4>🤖 Kỹ thuật Prompt Engineering 5 Thành phần</h4>
           <ul>
@@ -539,7 +692,9 @@
           </div>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/stitch_prompt_input_evidence.png" alt="Stitch Prompt Evidence">
+          <div class="wide-media-card">
+            <img src="../assets/stitch/stitch_prompt_input_evidence.png" alt="Stitch Prompt Evidence">
+          </div>
         </div>
       </div>
     </section>
@@ -553,7 +708,7 @@
         </div>
         <span class="speaker-tag">👤 Phan Anh Tuấn</span>
       </div>
-      <div class="slide-body">
+      <div class="slide-body wide-layout">
         <div class="slide-content">
           <h4>🔍 5 Lỗi Usability nghiêm trọng được phát hiện</h4>
           <ul>
@@ -572,7 +727,9 @@
           </ul>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/figma_canvas_7_screens.png" alt="Iteration Before and After">
+          <div class="wide-media-card">
+            <img src="../assets/stitch/figma_canvas_7_screens.png" alt="Iteration Before and After">
+          </div>
         </div>
       </div>
     </section>
@@ -636,25 +793,46 @@
         </div>
         <span class="speaker-tag">👤 Đỗ Anh Minh</span>
       </div>
-      <div class="slide-body">
-        <div class="slide-content">
-          <h4>📱 Trưng bày 8 Màn hình Độc lập (Chuẩn C6)</h4>
-          <ul>
-            <li><strong>Screen 01:</strong> Discovery Feed (Khám phá & Bộ lọc dự án)</li>
-            <li><strong>Screen 02:</strong> Project Detail (Chi tiết dự án & Skill Matrix)</li>
-            <li><strong>Screen 03:</strong> Apply Modal Sheet (Điền đơn & cam kết giờ)</li>
-            <li><strong>Screen 04:</strong> Application Submitted (Xác nhận gửi đơn)</li>
-            <li><strong>Screen 05:</strong> My Applications Tracker (Quản lý tiến độ đơn)</li>
-            <li><strong>Screen 06:</strong> Chemistry Call Scheduler (Lên lịch phỏng vấn)</li>
-            <li><strong>Screen 07:</strong> Chemistry Call Confirmed (Lịch hẹn hoàn tất)</li>
-            <li><strong>Screen 08:</strong> Empty State & Recovery (Phục hồi tìm kiếm)</li>
-          </ul>
-          <div class="highlight-box">
-            🎨 <strong>Tiêu chuẩn hình ảnh:</strong> Hệ thống lưới 8dp, font Inter sắc nét, tỷ lệ tương phản tối thiểu 4.68:1.
-          </div>
+      <div class="slide-body full-width">
+        <div class="screens-badges-bar">
+          <span class="feature-pill">📱 Chuẩn kiểm định C6: Đủ 8 màn hình chức năng riêng biệt</span>
+          <span class="feature-pill">⚡ Rule of 3 Taps: Tìm kiếm & nộp đơn trong 60 giây</span>
+          <span class="feature-pill">🔄 Zero Dead-Ends: Luồng khép kín & phục hồi lỗi 1 chạm</span>
+          <span class="feature-pill">📐 8dp Grid & Material 3: Nhất quán UI 100%</span>
         </div>
-        <div class="slide-media">
-          <img src="../assets/stitch/figma_canvas_8_screens.png" alt="8 Final UI Screens">
+        <div class="screens-grid-8">
+          <div class="mini-screen-card" title="Screen 01: Khám phá dự án">
+            <span class="mini-screen-tag">01. Discovery</span>
+            <img src="../assets/stitch/screen_01_discovery_feed.png" alt="Screen 01: Discovery Feed">
+          </div>
+          <div class="mini-screen-card" title="Screen 02: Chi tiết dự án">
+            <span class="mini-screen-tag">02. Detail</span>
+            <img src="../assets/stitch/screen_02_project_detail.png" alt="Screen 02: Project Detail">
+          </div>
+          <div class="mini-screen-card" title="Screen 03: Bottom Sheet nộp đơn">
+            <span class="mini-screen-tag">03. Apply Sheet</span>
+            <img src="../assets/stitch/screen_03_apply_sheet.png" alt="Screen 03: Apply Sheet">
+          </div>
+          <div class="mini-screen-card" title="Screen 04: Nộp đơn thành công">
+            <span class="mini-screen-tag">04. Submitted</span>
+            <img src="../assets/stitch/screen_04_application_submitted.png" alt="Screen 04: Submitted">
+          </div>
+          <div class="mini-screen-card" title="Screen 05: Theo dõi tiến độ đơn">
+            <span class="mini-screen-tag">05. Tracker</span>
+            <img src="../assets/stitch/screen_05_my_applications_tracker.png" alt="Screen 05: Tracker">
+          </div>
+          <div class="mini-screen-card" title="Screen 06: Lên lịch phỏng vấn">
+            <span class="mini-screen-tag">06. Call Modal</span>
+            <img src="../assets/stitch/screen_06_chemistry_call_modal.png" alt="Screen 06: Call Modal">
+          </div>
+          <div class="mini-screen-card" title="Screen 07: Xác nhận cuộc hẹn">
+            <span class="mini-screen-tag">07. Confirmed</span>
+            <img src="../assets/stitch/screen_07_chemistry_call_confirmed.png" alt="Screen 07: Confirmed">
+          </div>
+          <div class="mini-screen-card" title="Screen 08: Phục hồi tìm kiếm rỗng">
+            <span class="mini-screen-tag">08. Recovery</span>
+            <img src="../assets/stitch/screen_08_empty_state.png" alt="Screen 08: Empty Recovery">
+          </div>
         </div>
       </div>
     </section>
@@ -668,7 +846,7 @@
         </div>
         <span class="speaker-tag">👤 Đỗ Anh Minh</span>
       </div>
-      <div class="slide-body">
+      <div class="slide-body wide-layout">
         <div class="slide-content">
           <h4>🎨 Tokens & 9 Nhóm Linh kiện Chuẩn hóa</h4>
           <ul>
@@ -689,7 +867,9 @@
           </ul>
         </div>
         <div class="slide-media">
-          <img src="../assets/figma/05_components_library.svg" alt="Figma Components Library">
+          <div class="wide-media-card">
+            <img src="../assets/figma/05_components_library.svg" alt="Figma Components Library">
+          </div>
         </div>
       </div>
     </section>
@@ -724,13 +904,15 @@
           </ul>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/screen_03_apply_sheet.png" alt="Touch Target and Contrast Spec">
+          <div class="phone-mockup">
+            <img src="../assets/stitch/screen_03_apply_sheet.png" alt="Touch Target and Contrast Spec">
+          </div>
         </div>
       </div>
     </section>
 
     <!-- SLIDE 11 -->
-    <section class="slide" id="slide-11" data-speaker="Lữ Phước Nhật Tú" data-notes="Bản Prototype trên Figma Page 06 được liên kết tỉ mỉ với đầy đủ 3 luồng người dùng. Các thao tác mở Bottom Sheet, chuyển cảnh khi nộp đơn thành công và quay trở lại trang chủ đều hoạt động mượt mà. Đặc biệt, người dùng có thể thử nghiệm nhánh lỗi tại luồng tìm kiếm và phục hồi dễ dàng. Ngay sau đây, nhóm sẽ trình diễn trực tiếp bản Prototype này trong phần Demo 5 phút.">
+    <section class="slide" id="slide-11" data-speaker="Lữ Phước Nhật Tú" data-notes="Bản Prototype trên Figma Page 06 được liên kết tỉ mI với đầy đủ 3 luồng người dùng. Các thao tác mở Bottom Sheet, chuyển cảnh khi nộp đơn thành công và quay trở lại trang chủ đều hoạt động mượt mà. Đặc biệt, người dùng có thể thử nghiệm nhánh lỗi tại luồng tìm kiếm và phục hồi dễ dàng. Ngay sau đây, nhóm sẽ trình diễn trực tiếp bản Prototype này trong phần Demo 5 phút.">
       <div class="slide-header">
         <div class="slide-title-wrap">
           <span class="slide-number">Slide 11 / 12</span>
@@ -757,7 +939,9 @@
           </div>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/screen_06_chemistry_call_modal.png" alt="Figma Prototype Interaction">
+          <div class="phone-mockup">
+            <img src="../assets/stitch/screen_06_chemistry_call_modal.png" alt="Figma Prototype Interaction">
+          </div>
         </div>
       </div>
     </section>
@@ -793,7 +977,9 @@
           </table>
         </div>
         <div class="slide-media">
-          <img src="../assets/stitch/screen_04_application_submitted.png" alt="Success Handoff State">
+          <div class="phone-mockup">
+            <img src="../assets/stitch/screen_04_application_submitted.png" alt="Success Handoff State">
+          </div>
         </div>
       </div>
     </section>
